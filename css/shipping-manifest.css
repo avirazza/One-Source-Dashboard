@@ -44,7 +44,7 @@ ul#select2--results {
     display: flex;
     align-items: center;
     /* margin-right: 30px; */
-    max-width: 300px;
+    max-width: 270px;
 }
 
 span.line {
@@ -59,7 +59,7 @@ span.date-label {
     margin: 0 5px;
 }
 
-.delivery-filter, .reciving-status-filter, .method-filter, .carrier-filter{
+.delivery-filter, .reciving-status-filter, .method-filter, .carrier-filter, .po-filter{
     display: flex;
     align-items: center;
     /* margin-right: 30px; */
@@ -73,12 +73,10 @@ th.th-title {
     min-width: 300px;
 }
 
-th.th-days {
-    max-width: 80px;
-}
-
 span.filter-label {
     margin-right: 5px;
+    font-size: 10px;
+
 }
 
 .search-filter {
