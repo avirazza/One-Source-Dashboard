@@ -1,0 +1,86 @@
+.table-filter {
+    padding: 8px 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.count-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 30px; */
+}
+
+.count-filter form select{
+    width: 75px;
+}
+
+input.select2-search__field {
+    background-image: url(https://www.onesourcesuppliers.com/img/plugins/chosen-sprite.png);
+    background-size: 50px;
+    background-position: 100% 165%;
+    background-repeat: no-repeat;
+    height: 25px;
+    outline: 0;
+}
+
+ul#select2--results {
+    margin: 5px 8px;
+}
+
+.select2-results__option--highlighted{
+    background: #316DCA !important;
+}
+
+.table-filter {
+    font-size: 13px;
+    color: #999999;
+    font-weight: 500;
+}
+
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    /* margin-right: 30px; */
+    max-width: 300px;
+}
+
+span.line {
+    width: 25px;
+    height: 1px;
+    background: #333;
+    margin: 0 10px;
+}
+
+span.date-label {
+    color: #999999;
+    margin: 0 5px;
+}
+
+.delivery-filter, .reciving-status-filter, .method-filter, .carrier-filter{
+    display: flex;
+    align-items: center;
+    /* margin-right: 30px; */
+}
+
+.delivery-filter form, .reciving-status-filter form{
+    margin-left: 5px;
+}
+
+th.th-title {
+    min-width: 300px;
+}
+
+th.th-days {
+    max-width: 80px;
+}
+
+span.filter-label {
+    margin-right: 5px;
+}
+
+.search-filter {
+    max-width: 100px;
+}

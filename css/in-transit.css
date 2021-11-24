@@ -1,0 +1,82 @@
+.list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F5F5F5;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    line-height: 1;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+}
+
+.list-heading input {
+    width: 270px;
+    line-height: 1.428571429;
+    padding: 3px 8px;
+    color: #999;
+    outline: none;
+    background: #FFF;
+    max-height: 30px;
+    height: 29px;
+    border: 1px solid #ddd;
+}
+
+.product-tab-heading {
+    background: #F5F5F5;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    align-items: center;
+}
+
+span.product-open-icon {
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+span.product-variation-toggle i {
+    font-size: 20px;
+    color: #B0DAEC;
+}
+
+.in-inventory, .inbound, .inboavg-shippingund, .number-of-shipments{
+    font-weight: bold;
+}
+
+.product-variation-toggle{
+    cursor: pointer;
+}
+
+.product-tab-content {
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: none;
+}
+
+.product-variation {
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.product-tab-content .product-variation:last-child{
+    margin-bottom: 0px;
+}
+
+span.action-icons a {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-left: 4px;
+}
+
+.single-product-tab{
+    margin-bottom: 20px;
+}
