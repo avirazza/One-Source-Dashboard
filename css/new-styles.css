@@ -1,0 +1,357 @@
+/* Shipping manifest */
+
+.table-filter {
+    padding: 8px 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.count-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 30px; */
+}
+
+.count-filter form select{
+    width: 75px;
+}
+
+input.select2-search__field {
+    background-image: url(https://www.onesourcesuppliers.com/img/plugins/chosen-sprite.png);
+    background-size: 50px;
+    background-position: 100% 165%;
+    background-repeat: no-repeat;
+    height: 25px;
+    outline: 0;
+}
+
+ul#select2--results {
+    margin: 5px 8px;
+}
+
+.select2-results__option--highlighted{
+    background: #316DCA !important;
+}
+
+.table-filter {
+    font-size: 13px;
+    color: #999999;
+    font-weight: 500;
+}
+
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    /* margin-right: 30px; */
+    max-width: 270px;
+}
+
+span.line {
+    width: 25px;
+    height: 1px;
+    background: #333;
+    margin: 0 10px;
+}
+
+span.date-label {
+    color: #999999;
+    margin: 0 5px;
+}
+
+.delivery-filter, .reciving-status-filter, .method-filter, .carrier-filter, .po-filter{
+    display: flex;
+    align-items: center;
+    /* margin-right: 30px; */
+}
+
+.delivery-filter form, .reciving-status-filter form{
+    margin-left: 5px;
+}
+
+th.th-title {
+    min-width: 300px;
+}
+
+span.filter-label {
+    margin-right: 5px;
+    font-size: 10px;
+
+}
+
+.search-filter {
+    max-width: 100px;
+}
+
+/* In transit */
+
+.list-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #F5F5F5;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    line-height: 1;
+    border-bottom: 1px solid #ddd;
+    font-size: 13px;
+}
+
+.list-heading input {
+    width: 270px;
+    line-height: 1.428571429;
+    padding: 3px 8px;
+    color: #999;
+    outline: none;
+    background: #FFF;
+    max-height: 30px;
+    height: 29px;
+    border: 1px solid #ddd;
+}
+
+.product-tab-heading {
+    background: #F5F5F5;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    align-items: center;
+}
+
+span.product-open-icon {
+    background: #fff;
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+span.product-variation-toggle i {
+    font-size: 20px;
+    color: #B0DAEC;
+}
+
+.in-inventory, .inbound, .inboavg-shippingund, .number-of-shipments{
+    font-weight: bold;
+}
+
+.product-variation-toggle{
+    cursor: pointer;
+}
+
+.product-tab-content {
+    border: 1px solid #ddd;
+    padding: 20px;
+    display: none;
+}
+
+.product-variation {
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.product-tab-content .product-variation:last-child{
+    margin-bottom: 0px;
+}
+
+span.action-icons a {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-left: 4px;
+}
+
+.single-product-tab{
+    margin-bottom: 20px;
+}
+
+/* Create new */
+
+.bg-delete {
+    background: #DB5854;
+}
+
+.create-status-button {
+    color: #fff !important;
+    margin: 10px 5px;
+    min-width: 100px;
+}
+
+.create-new-tabs {
+    padding: 15px;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icons-right {
+    margin-right: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icons-right i {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-left: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 2px;
+}
+
+.icons-right i:first-child {
+    color: #3093C7;
+    border: none;
+    font-size: 20px;
+    background: unset;
+}
+
+.create-new-tabs {
+    display: flex;
+}
+
+.create-new-tabs .tab {
+    border: 1px solid #ddd;
+    padding: 5px 8px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.create-new-tabs .tab.active, .create-new-tabs .tab:hover{
+    background: #F8F8F8;
+}
+
+.create-new-tabs .tab i{
+    margin-right: 10px;
+    color: #B0DAEC;
+}
+
+.inline-form-field{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.inline-form-field label {
+    margin-right: 10px;
+}
+
+.add-new-form-left, .add-new-form-right{
+    padding: 20px 50px;
+}
+
+.inline-form-field label {
+    margin-right: 10px;
+}
+
+.inline-form-field .form-control, .inline-form-field p {
+    width: 80%;
+}
+
+.add-tracking-number-icon {
+    height: 25px;
+    width: 25px;
+    background: #428BCA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.tracking-label {
+    display: flex;
+    padding: 10px 0;
+}
+
+.tracking-label p {
+    margin-right: 10px;
+}
+
+.tracking-number-section {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.tracking-numbers {
+    width: 80%;
+}
+
+.tracking-number {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.tracking-numbers .tracking-number:last-child{
+    border-bottom: 0px;
+}
+
+.tracking-number i {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.tracking-label p {
+    font-weight: 700;
+}
+
+.add-tracking-number-popup {
+    background: #A6CADD;
+    padding: 20px;
+    min-width: 500px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button.save-tracking-number {
+    background: #61A1C2;
+    border: none;
+    padding: 10px;
+    margin-left: 40px;
+    min-width: 100px;
+    color: #fff;
+}
+
+.add-tracking-number-popup-wrap {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    /* background: red; */
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.add-tracking-number-popup-outer {
+    /* background: green; */
+    width: 100%;
+    height: 100%;
+}
+
+.tracking-number .boxes:after{
+    content: ' boxes'
+}
+
+input:read-only {
+    /* background-color: #ddd !important; */
+    opacity: .5 !important;
+}
