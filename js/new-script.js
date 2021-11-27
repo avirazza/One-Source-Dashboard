@@ -1,77 +1,242 @@
-$(document).ready(function(){
-    $('.product-variation-toggle').click(function(){
-        $(this).parent().parent().find('.product-tab-content').toggle();
-    });
+var app = new Vue({
+    el: '#main',
+    data: {
+        //For tracking numbers
 
-    //Add new page
+        trackingNumberFormVisible: false,
+        trackingNumberFormMode: 'save',
+        trackingNumberToUpdate: null,
+        trackingNumberForm: {
+            trackingNumber: null,
+            numberOfBoxesInTracking: null,
+            company: null
+        },
+        trackingNumbers: [
+            //Prepopulated data
+            // {trackingNumber: '2825226342', numberOfBoxesInTracking: 216, company: 'UPS'},
+            // {trackingNumber: '2825226343', numberOfBoxesInTracking: 32, company: 'Fedex'}
+        ],
 
-    $('.add-tracking-number-icon').click(function(){
-        $('.add-tracking-number-popup-wrap').show();
-    });
-    $('.add-tracking-number-popup-outer').click(function(){
-        $('.add-tracking-number-popup-wrap').hide();
-        $('.tracking-number-form')[0].reset();
-    });
+        //For product boxes
 
-    //Tracking number form submission
+        productBoxFormVisible: false,
+        productBoxFormMode: 'save',
+        productToUpdate: null,
+        productBoxForm: {
+            dimention1: null,
+            dimention2: null,
+            dimention3: null,
+            weight: null,
+            numberOfBoxes: null
+        },
+        productBoxes: [
+            //Prepopulated data
+            // {
+            //     expanded: false,
+            //     dimentions: {
+            //         dimention1: 10,
+            //         dimention2: 20,
+            //         dimention3: 30,
+            //     },
+            //     weight: 40,
+            //     numberOfBoxes: 50,
+            //     costOfBox: 99,
+            //     subItems: [
+            //         {sku: 'SKU1', qty: 60, costPerItem: 70},
+            //         {sku: 'SKU2', qty: 80, costPerItem: 90},
+            //         {sku: 'SKU3', qty: 100, costPerItem: 110}
+            //     ]
+            // },
+            // {
+            //     expanded: false,
+            //     dimentions: {
+            //         dimention1: 60,
+            //         dimention2: 70,
+            //         dimention3: 80,
+            //     },
+            //     weight: 90,
+            //     numberOfBoxes: 100,
+            //     costOfBox: 99,
+            //     subItems: [
+            //         {sku: 'SKU4', qty: 60, costPerItem: 70},
+            //         {sku: 'SKU5', qty: 80, costPerItem: 90},
+            //         {sku: 'SKU6', qty: 100, costPerItem: 110}
+            //     ]
+            // }
+        ],
 
-    $('.tracking-number-form').submit(function(e){
-        e.preventDefault();
-        var trackingNumber = $('.tracking-number-form #tracking_number').val();
-        var numberOfBoxes = $('.tracking-number-form #number_of_boxes_in_tracking').val();
-        var company = $('.tracking-number-form #tracking_number_company').val();
-        var actionType = $('.tracking-number-form #action_type').val();
-        //console.log(trackingNumber, numberOfBoxes, company);
-        
-        if(actionType == 'add'){
-            $('.tracking-numbers').append(`
-            <div class="tracking-number" id="${trackingNumber}">
-                <div class="number">${trackingNumber}</div>
-                <div class="company">${company}</div>
-                <div class="boxes">${numberOfBoxes}</div>
+        //For sub items
 
-                <div class="action-buttons">
-                    <i class="fa fa-pencil edit-tracking-number" aria-hidden="true"></i>
-                    <i class="fa fa-trash delete-tracking-number" aria-hidden="true"></i>
-                </div>
-            </div>
-        `);
+        subItemFormVisible: false,
+        subItemFormMode: 'save',
+        subItemIndexToUpdate: null,
+        subItemForm: {
+            parentIndex: null,
+            childIndex: null,
+            sku: null,
+            qty: null,
+            costPerItem: null
         }
 
-        if(actionType == 'update'){
-            $('#'+trackingNumber).find('.number').text(trackingNumber);
-            $('#'+trackingNumber).find('.company').text(company);
-            $('#'+trackingNumber).find('.boxes').text(numberOfBoxes);
+    },
+    methods: {
+        //For tracking numbers
+
+        openTrackingNumberForm(){
+            this.trackingNumberFormVisible = true;
+        },
+        closeTrackingNumberForm(){
+            this.trackingNumberFormVisible = false;
+            this.trackingNumberForm.trackingNumber = null;
+            this.trackingNumberForm.numberOfBoxesInTracking = null;
+            this.trackingNumberForm.company = null;
+
+            this.trackingNumberFormMode = 'save';
+        },
+        handleTrackingNumberForm(){
+            if(this.trackingNumberFormMode == 'save'){
+                this.trackingNumbers.push({
+                    trackingNumber: this.trackingNumberForm.trackingNumber, 
+                    numberOfBoxesInTracking: this.trackingNumberForm.numberOfBoxesInTracking, 
+                    company: this.trackingNumberForm.company
+                });
+                this.trackingNumberForm.trackingNumber = null,
+                this.trackingNumberForm.numberOfBoxesInTracking = null,
+                this.trackingNumberForm.company = null
+    
+                this.trackingNumberFormVisible = false;
+            }else if(this.trackingNumberFormMode == 'update'){
+                this.trackingNumbers[this.trackingNumberToUpdate].trackingNumber = this.trackingNumberForm.trackingNumber;
+                this.trackingNumbers[this.trackingNumberToUpdate].numberOfBoxesInTracking = this.trackingNumberForm.numberOfBoxesInTracking;
+                this.trackingNumbers[this.trackingNumberToUpdate].company = this.trackingNumberForm.company;
+                
+                this.closeTrackingNumberForm();
+            }
+
+        },
+        deleteTrackingNumber(i){
+            this.trackingNumbers.splice(i, 1);
+        },
+        editTrackingNumber(i){
+            this.trackingNumberForm.trackingNumber = this.trackingNumbers[i].trackingNumber;
+            this.trackingNumberForm.numberOfBoxesInTracking = this.trackingNumbers[i].numberOfBoxesInTracking;
+            this.trackingNumberForm.company = this.trackingNumbers[i].company;
+
+            this.trackingNumberFormMode = 'update';
+            this.trackingNumberToUpdate = i;
+            this.openTrackingNumberForm();
+        },
+
+        // For product boxes
+
+        openProductBoxForm(){
+            this.productBoxFormVisible = true;
+        },
+        closeProductBoxForm(){
+            this.productBoxFormVisible = false;
+
+            this.productBoxForm.dimention1 = null;
+            this.productBoxForm.dimention2 = null;
+            this.productBoxForm.dimention3 = null;
+            this.productBoxForm.weight = null;
+            this.productBoxForm.numberOfBoxes = null;
+
+            this.productBoxFormMode = 'save';
+        },
+        handleProductBoxForm(){
+            if(this.productBoxFormMode == 'save'){
+                this.productBoxes.push({ 
+                    expanded: false,
+                    dimentions: {
+                        dimention1: this.productBoxForm.dimention1,
+                        dimention2: this.productBoxForm.dimention2,
+                        dimention3: this.productBoxForm.dimention3, 
+                    },
+                    weight: this.productBoxForm.weight, 
+                    numberOfBoxes: this.productBoxForm.numberOfBoxes,
+                    subItems: []
+                });
+            }else if(this.productBoxFormMode == 'update'){  
+                this.productBoxes[this.productToUpdate].dimentions.dimention1 = this.productBoxForm.dimention1;
+                this.productBoxes[this.productToUpdate].dimentions.dimention2 = this.productBoxForm.dimention2;
+                this.productBoxes[this.productToUpdate].dimentions.dimention3 = this.productBoxForm.dimention3;
+                this.productBoxes[this.productToUpdate].weight = this.productBoxForm.weight;
+                this.productBoxes[this.productToUpdate].numberOfBoxes = this.productBoxForm.numberOfBoxes;
+            }
+            this.closeProductBoxForm()
+        },
+        editProductBox(i){
+            this.productBoxFormMode = 'update';
+
+            this.productBoxForm.dimention1 = this.productBoxes[i].dimentions.dimention1;
+            this.productBoxForm.dimention2 = this.productBoxes[i].dimentions.dimention2;
+            this.productBoxForm.dimention3 = this.productBoxes[i].dimentions.dimention3;
+            this.productBoxForm.weight = this.productBoxes[i].weight;
+            this.productBoxForm.numberOfBoxes = this.productBoxes[i].numberOfBoxes;
+            this.productBoxForm.numberOfBoxes = this.productBoxes[i].numberOfBoxes;
+
+            this.productToUpdate = i;
+            this.openProductBoxForm();
+        },
+
+        //For sub items
+        
+        openSubBoxForm(){
+            this.subItemFormVisible = true;
+        },
+        closeSubBoxForm(){
+            this.subItemFormVisible = false;
+
+            this.subItemForm.parentIndex = null;
+            this.subItemForm.childIndex = null;
+            this.subItemForm.sku = null;
+            this.subItemForm.qty = null;
+            this.subItemForm.costPerItem = null;
+
+            this.subItemFormMode = 'save';
+        },
+
+        deleteBox(i){
+            this.productBoxes.splice(i, 1);
+        },
+        handleSubBoxForm(){
+            var parent = this.subItemForm.parentIndex;
+            var child = this.subItemForm.childIndex;
+
+            if(this.subItemFormMode == 'save'){
+                this.productBoxes[parent].subItems.push({ 
+                    sku: this.subItemForm.sku,
+                    qty: this.subItemForm.qty, 
+                    costPerItem: this.subItemForm.costPerItem
+                });
+
+            }else if(this.subItemFormMode == 'update'){ //Updating here ***************************************
+                this.productBoxes[parent].subItems[child].sku = this.subItemForm.sku;
+                this.productBoxes[parent].subItems[child].qty = this.subItemForm.qty;
+                this.productBoxes[parent].subItems[child].costPerItem = this.subItemForm.costPerItem;
+            }
+            this.closeSubBoxForm();
+        },
+        addSubItem(parentIndex){
+            this.subItemForm.parentIndex = parentIndex;
+            this.openSubBoxForm();
+        },
+        editSubItem(parentIndex, childIndex){ 
+            this.subItemForm.parentIndex = parentIndex;
+            this.subItemForm.childIndex = childIndex;
+
+            this.subItemForm.sku = this.productBoxes[parentIndex].subItems[childIndex].sku;
+            this.subItemForm.qty = this.productBoxes[parentIndex].subItems[childIndex].qty;
+            this.subItemForm.costPerItem = this.productBoxes[parentIndex].subItems[childIndex].costPerItem;
+
+            this.subItemFormMode = 'update';
+            this.openSubBoxForm();
+        },
+        deleteSubBox(parentIndex, childIndex){
+            this.productBoxes[parentIndex].subItems.splice(childIndex, 1);
+        },
+        toggleContent(i){
+            this.productBoxes[i].expanded = !this.productBoxes[i].expanded;
         }
-
-        $('.tracking-number-form')[0].reset();
-        $('.add-tracking-number-popup-wrap').hide();
-    });
-
-    //Delete tracking number
-    $(document).on("click", ".delete-tracking-number" , function() {
-        $(this).parent().parent().remove();
-    });
-
-    //Edit tracking number
-    $(document).on("click", ".edit-tracking-number" , function() {
-        var trackingNumber = $(this).parent().parent().find('.number').text();
-        var numberOfBoxes = $(this).parent().parent().find('.company').text();
-        var company = $(this).parent().parent().find('.boxes').text();
-
-        //console.log(trackingNumber, numberOfBoxes, company);
-
-        
-        $('#tracking_number').val(trackingNumber);
-        $('#tracking_number').prop("readonly", true);
-
-        $('#number_of_boxes_in_tracking').val(company);
-        $('#tracking_number_company').val(numberOfBoxes);
-        $('#action_type').val('update');
-        $('.save-tracking-number').text('Update');
-
-        $('.add-tracking-number-popup-wrap').show();
-
-        
-    });
-});
+    }
+})
