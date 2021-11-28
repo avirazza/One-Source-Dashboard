@@ -13,8 +13,8 @@ var app = new Vue({
         },
         trackingNumbers: [
             //Prepopulated data
-            // {trackingNumber: '2825226342', numberOfBoxesInTracking: 216, company: 'UPS'},
-            // {trackingNumber: '2825226343', numberOfBoxesInTracking: 32, company: 'Fedex'}
+            {trackingNumber: '2825226342', numberOfBoxesInTracking: 216, company: 'UPS'},
+            {trackingNumber: '2825226343', numberOfBoxesInTracking: 32, company: 'Fedex'}
         ],
 
         //For product boxes
@@ -31,38 +31,38 @@ var app = new Vue({
         },
         productBoxes: [
             //Prepopulated data
-            // {
-            //     expanded: false,
-            //     dimentions: {
-            //         dimention1: 10,
-            //         dimention2: 20,
-            //         dimention3: 30,
-            //     },
-            //     weight: 40,
-            //     numberOfBoxes: 50,
-            //     costOfBox: 99,
-            //     subItems: [
-            //         {sku: 'SKU1', qty: 60, costPerItem: 70},
-            //         {sku: 'SKU2', qty: 80, costPerItem: 90},
-            //         {sku: 'SKU3', qty: 100, costPerItem: 110}
-            //     ]
-            // },
-            // {
-            //     expanded: false,
-            //     dimentions: {
-            //         dimention1: 60,
-            //         dimention2: 70,
-            //         dimention3: 80,
-            //     },
-            //     weight: 90,
-            //     numberOfBoxes: 100,
-            //     costOfBox: 99,
-            //     subItems: [
-            //         {sku: 'SKU4', qty: 60, costPerItem: 70},
-            //         {sku: 'SKU5', qty: 80, costPerItem: 90},
-            //         {sku: 'SKU6', qty: 100, costPerItem: 110}
-            //     ]
-            // }
+            {
+                expanded: false,
+                dimentions: {
+                    dimention1: 10,
+                    dimention2: 20,
+                    dimention3: 30,
+                },
+                weight: 40,
+                numberOfBoxes: 50,
+                costOfBox: 99,
+                subItems: [
+                    {sku: 'SKU1', qty: 60, costPerItem: 70},
+                    {sku: 'SKU2', qty: 80, costPerItem: 90},
+                    {sku: 'SKU3', qty: 100, costPerItem: 110}
+                ]
+            },
+            {
+                expanded: false,
+                dimentions: {
+                    dimention1: 60,
+                    dimention2: 70,
+                    dimention3: 80,
+                },
+                weight: 90,
+                numberOfBoxes: 100,
+                costOfBox: 99,
+                subItems: [
+                    {sku: 'SKU4', qty: 60, costPerItem: 70},
+                    {sku: 'SKU5', qty: 80, costPerItem: 90},
+                    {sku: 'SKU6', qty: 100, costPerItem: 110}
+                ]
+            }
         ],
 
         //For sub items
@@ -76,7 +76,10 @@ var app = new Vue({
             sku: null,
             qty: null,
             costPerItem: null
-        }
+        },
+
+        //Final form submit
+        showGenerateBillPopup: false
 
     },
     methods: {
@@ -210,7 +213,7 @@ var app = new Vue({
                     costPerItem: this.subItemForm.costPerItem
                 });
 
-            }else if(this.subItemFormMode == 'update'){ //Updating here ***************************************
+            }else if(this.subItemFormMode == 'update'){ 
                 this.productBoxes[parent].subItems[child].sku = this.subItemForm.sku;
                 this.productBoxes[parent].subItems[child].qty = this.subItemForm.qty;
                 this.productBoxes[parent].subItems[child].costPerItem = this.subItemForm.costPerItem;
@@ -237,6 +240,20 @@ var app = new Vue({
         },
         toggleContent(i){
             this.productBoxes[i].expanded = !this.productBoxes[i].expanded;
+        },
+
+        //Final form submission
+
+        openGenerateBillPopup(){
+            this.showGenerateBillPopup = true;
+        },
+        closeGenerateBillPopup(){
+            this.showGenerateBillPopup = false;
+        },
+        generateBill(){
+            console.log('Generating bill');
+            this.closeGenerateBillPopup();
         }
+
     }
 })

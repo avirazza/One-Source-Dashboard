@@ -331,6 +331,10 @@
 
             <!-- / Product boxes -->
 
+            <div class="form-fial-submit">
+                <button class="btn bg-blue3 bg-gradient btn-sm mr5 form-final-submit-button" @click="openGenerateBillPopup">Save</button>
+            </div>
+
             <!-- Add tracking number form -->
 
             <div class="add-tracking-number-popup-wrap" v-if="trackingNumberFormVisible" v-bind:class="{ active: trackingNumberFormVisible }">
@@ -415,6 +419,21 @@
             </div>
 
             <!-- / Sub box form -->
+
+            <!--  Generate bill popup -->
+
+            <div class="add-box-form-wrap" v-if="showGenerateBillPopup" v-bind:class="{ active: showGenerateBillPopup }">
+                <div class="add-box-outer" @click="closeGenerateBillPopup"></div>
+                <div class="add-box-form-inner generate-bill-popup">
+                    <p>Do you want to generate a bill ?</p>
+                    <div class="generate-bill-popup-buttons">
+                        <button @click="generateBill">Yes</button>
+                        <button @click="closeGenerateBillPopup">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- / Generate bill popup -->
 
 
          </div>
