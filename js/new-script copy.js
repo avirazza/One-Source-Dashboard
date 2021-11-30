@@ -152,10 +152,11 @@ var app = new Vue({
         handleProductBoxForm(){
             if(this.productBoxFormMode == 'save'){
                 var subItemsToAdd = parseInt(this.productBoxForm.numberOfBoxes);
+                var subItemElement = {sku: 'SKU', qty: 0, costPerItem: 0};
                 var subItemArray = [];
 
                 for (let i = 0; i < subItemsToAdd; i++) {
-                    subItemArray.push({sku: 'SKU', qty: 0, costPerItem: 0});
+                    subItemArray.push(subItemElement);
                 }
                 this.productBoxes.push({ 
                     expanded: false,
@@ -176,13 +177,14 @@ var app = new Vue({
                 this.productBoxes[this.productToUpdate].weight = this.productBoxForm.weight;
 
                 var subItemsToAdd = parseInt(this.productBoxForm.numberOfBoxes);
+                var subItemElement = {sku: 'SKU', qty: 0, costPerItem: 0};
                 var subItemArray = this.productBoxes[this.productToUpdate].subItems;
 
                 if(subItemsToAdd > subItemArray.length){
                     var numberOfItemShouldBeAdded = subItemsToAdd - subItemArray.length;
                     //console.log(numberOfItemShouldBeAdded, ' items should be added');
                     for (let i = 0; i < numberOfItemShouldBeAdded; i++) {
-                        subItemArray.push({sku: 'SKU', qty: 0, costPerItem: 0});
+                        subItemArray.push(subItemElement);
                     }
 
                 }else if(subItemsToAdd < subItemArray.length){
@@ -248,11 +250,9 @@ var app = new Vue({
                 this.productBoxes[parent].subItems[child].qty = this.subItemForm.qty;
                 this.productBoxes[parent].subItems[child].costPerItem = this.subItemForm.costPerItem;
             }
-            //console.log('Parent :',parent, ' Child:',child );
             this.closeSubBoxForm();
         },
-        addSubItem(parentIndex){ 
-            this.productBoxes[parentIndex].expanded = true; //************************************ */
+        addSubItem(parentIndex){
             this.subItemForm.parentIndex = parentIndex;
             this.openSubBoxForm();
         },

@@ -525,3 +525,7 @@ span.box-sku-numbers .box-sku-number:last-child:after {
     margin: 0 10px;
     padding: 10px 30px;
 }
+
+.box-action-buttons {
+    max-width: 50px;
+}

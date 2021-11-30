@@ -176,7 +176,7 @@
 
                               <div class="create-new-tabs">
                                     <div class="tab active"><i class="fa fa-window-maximize" aria-hidden="true"></i>General</div>
-                                    <div class="tab"><i class="fa fa-th-large" aria-hidden="true"></i>Reciving Records</div>
+                                    <div class="tab"><i class="fa fa-th-large" aria-hidden="true"></i>Receiving Records</div>
                                     <div class="tab"><i class="fa fa-credit-card" aria-hidden="true"></i>Bills</div>
                                     <div class="tab"><i class="fa fa-upload" aria-hidden="true"></i>Uploads</div>
                                     <div class="tab"><i class="fa fa-book" aria-hidden="true"></i>Audit Log</div>
@@ -190,7 +190,7 @@
                                         <div class="row">
                                             <div class="col-md-6 add-new-form-left">
                                                 <div class="inline-form-field"> 
-                                                    <label for="shipper">Sipper</label>
+                                                    <label for="shipper">Shipper</label>
                                                     <select name="shipper" id="sipper" class="form-control">
                                                         <option value="">Select</option>
                                                         <option value="">Shipper name</option>
@@ -210,13 +210,10 @@
                                                     <label for="method">Method</label>
                                                     <select name="method" id="method" class="form-control">
                                                         <option value="">Select</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
-                                                        <option value="">Method name</option>
+                                                        <option value="ocean">Ocean</option>
+                                                        <option value="matson">Matson</option>
+                                                        <option value="express">Express</option>
+                                                        <option value="economy">Economy</option>
                                                     </select>
                                                 </div>
                                                 <div class="inline-form-field"> 
@@ -232,21 +229,21 @@
                                                 </div>
                                                 <div class="inline-form-field"> 
                                                     <label for="number_of_boxes">Number of boxes</label>
-                                                    <input name="number_of_boxes" id="number_of_boxes" type="number" class="form-control">
+                                                    <input :value="productBoxes.length" name="number_of_boxes" id="number_of_boxes" type="number" class="form-control" readonly>
                                                 </div>
                                                 <div class="inline-form-field"> 
                                                     <label for="total_weight">Total Weight</label>
-                                                    <input type="text" name="total_weight" id="total_weight" class="form-control">
+                                                    <input :value="getTotalWeight()" type="number" name="total_weight" id="total_weight" class="form-control" readonly>
                                                 </div>
 
                                                 <div class="inline-form-field"> 
                                                     <label for="total_cost">Total Cost</label>
-                                                    <input type="text" name="total_cost" id="total_cost" class="form-control">
+                                                    <input type="text" name="total_cost" id="total_cost" class="form-control" v-model="totalCost">
                                                 </div>
 
                                                 <div class="inline-form-field"> 
                                                     <label for="cost_per_kilo">Cost per kilo</label>
-                                                    <input type="text" name="cost_per_kilo" id="cost_per_kilo" class="form-control">
+                                                    <input :value="getCostPerKillo()" type="text" name="cost_per_kilo" id="cost_per_kilo" class="form-control" readonly>
                                                 </div>
 
                                                 <div class="tracking-number-section">
@@ -295,19 +292,20 @@
 
             <div class="product-boxes">
                 <div class="box" v-for="(box, i) in productBoxes" :key="i">
-                    <div class="box-heading">
-                        <div><i aria-hidden="true" class="fa fa-plus toggle-product-box" @click="toggleContent(i)"></i> Dimention {{ box.dimentions.dimention1 }},{{ box.dimentions.dimention2 }},{{ box.dimentions.dimention3 }}</div>
-                        <div>Weight {{ box.weight }}</div>
-                        <div>Number of boxes {{ box.numberOfBoxes }}</div>
-                        <div>SKU:
+                    <div class="box-heading" @click.self="toggleContent(i)">
+                        <div @click="toggleContent(i)"><i aria-hidden="true" class="fa fa-plus toggle-product-box" v-if="!box.expanded"></i><i aria-hidden="true" class="fa fa-minus toggle-product-box" v-if="box.expanded"></i> Dimension {{ box.dimentions.dimention1 }},{{ box.dimentions.dimention2 }},{{ box.dimentions.dimention3 }}</div>
+                        <div @click="toggleContent(i)">Weight {{ box.weight }}</div>
+                        <div @click="toggleContent(i)">Number of boxes {{ box.subItems.length }}</div>
+                        <div @click="toggleContent(i)">Cost {{ box.weight * getCostPerKillo() }}</div>
+                        <div @click="toggleContent(i)">SKU:
                             <span class="box-sku-numbers">
                                 <span v-for="(subItem, i) in box.subItems" :key="i" class="box-sku-number">{{ subItem.sku }}</span>
                             </span>
                         </div>
                         <div class="box-action-buttons">
-                            <i aria-hidden="true" class="fa fa-pencil edit-box" @click="editProductBox(productBoxes.indexOf(box))"></i> 
-                            <i aria-hidden="true" class="fa fa-trash delete-box" @click="deleteBox(i)" v-if="!box.expanded"></i>
-                            <i aria-hidden="true" class="fa fa-plus add-sub-box" v-if="box.expanded" @click="addSubItem(productBoxes.indexOf(box))"></i>
+                            <!-- <i aria-hidden="true" class="fa fa-pencil edit-box" @click="editProductBox(productBoxes.indexOf(box))"></i>  -->
+                            <i aria-hidden="true" class="fa fa-plus add-sub-box" @click="addSubItem(productBoxes.indexOf(box))"></i>
+                            <i aria-hidden="true" class="fa fa-trash delete-box" @click="deleteBox(i)"></i>
                         </div>
                     </div>
                     <div class="box-content" v-if="box.expanded">
