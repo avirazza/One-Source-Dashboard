@@ -396,6 +396,7 @@ input:read-only {
     background: #F5F5F5;
     padding: 8px 15px;
     align-items: center;
+    cursor: pointer;
 }
 
 .box-action-buttons i, .sub-box-action-buttons i{

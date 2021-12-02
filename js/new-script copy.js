@@ -35,35 +35,19 @@ var app = new Vue({
         productBoxes: [
             //Prepopulated data
             {
+                numberOfBoxes: 2,
+                weight: 11,
                 expanded: false,
                 dimentions: {
                     dimention1: 10,
                     dimention2: 20,
                     dimention3: 30,
                 },
-                weight: 40,
-                numberOfBoxes: 50,
                 costOfBox: 99,
                 subItems: [
                     {sku: 'SKU1', qty: 60, costPerItem: 70},
                     {sku: 'SKU2', qty: 80, costPerItem: 90},
                     {sku: 'SKU3', qty: 100, costPerItem: 110}
-                ]
-            },
-            {
-                expanded: false,
-                dimentions: {
-                    dimention1: 60,
-                    dimention2: 70,
-                    dimention3: 80,
-                },
-                weight: 90,
-                numberOfBoxes: 100,
-                costOfBox: 99,
-                subItems: [
-                    {sku: 'SKU4', qty: 60, costPerItem: 70},
-                    {sku: 'SKU5', qty: 80, costPerItem: 90},
-                    {sku: 'SKU6', qty: 100, costPerItem: 110}
                 ]
             }
         ],

@@ -177,7 +177,7 @@
                               <div class="create-new-tabs">
                                     <div class="tab active"><i class="fa fa-window-maximize" aria-hidden="true"></i>General</div>
                                     <div class="tab"><i class="fa fa-th-large" aria-hidden="true"></i>Receiving Records</div>
-                                    <div class="tab"><i class="fa fa-credit-card" aria-hidden="true"></i>Bills</div>
+                                    <!-- <div class="tab"><i class="fa fa-credit-card" aria-hidden="true"></i>Bills</div> -->
                                     <div class="tab"><i class="fa fa-upload" aria-hidden="true"></i>Uploads</div>
                                     <div class="tab"><i class="fa fa-book" aria-hidden="true"></i>Audit Log</div>
                               </div>
@@ -228,12 +228,8 @@
                                                     <p>10/29/21 1:48 pm</p>
                                                 </div>
                                                 <div class="inline-form-field"> 
-                                                    <label for="number_of_boxes">Number of boxes</label>
-                                                    <input :value="productBoxes.length" name="number_of_boxes" id="number_of_boxes" type="number" class="form-control" readonly>
-                                                </div>
-                                                <div class="inline-form-field"> 
                                                     <label for="total_weight">Total Weight</label>
-                                                    <input :value="getTotalWeight()" type="number" name="total_weight" id="total_weight" class="form-control" readonly>
+                                                    <input type="text" name="total_weight" id="total_weight" class="form-control" v-model="totalWeight">
                                                 </div>
 
                                                 <div class="inline-form-field"> 
@@ -242,8 +238,13 @@
                                                 </div>
 
                                                 <div class="inline-form-field"> 
+                                                    <label for="number_of_boxes">Number of boxes</label>
+                                                    <input :value="getTotalNumberOfBoxes()" name="number_of_boxes" id="number_of_boxes" type="text" class="form-control" readonly>
+                                                </div>
+
+                                                <div class="inline-form-field"> 
                                                     <label for="cost_per_kilo">Cost per kilo</label>
-                                                    <input :value="getCostPerKillo()" type="text" name="cost_per_kilo" id="cost_per_kilo" class="form-control" readonly>
+                                                    <input :value="totalCost / totalWeight" type="text" name="cost_per_kilo" id="cost_per_kilo" class="form-control" readonly>
                                                 </div>
 
                                                 <div class="tracking-number-section">
@@ -293,10 +294,10 @@
             <div class="product-boxes">
                 <div class="box" v-for="(box, i) in productBoxes" :key="i">
                     <div class="box-heading" @click.self="toggleContent(i)">
-                        <div @click="toggleContent(i)"><i aria-hidden="true" class="fa fa-plus toggle-product-box" v-if="!box.expanded"></i><i aria-hidden="true" class="fa fa-minus toggle-product-box" v-if="box.expanded"></i> Dimension {{ box.dimentions.dimention1 }},{{ box.dimentions.dimention2 }},{{ box.dimentions.dimention3 }}</div>
-                        <div @click="toggleContent(i)">Weight {{ box.weight }}</div>
-                        <div @click="toggleContent(i)">Number of boxes {{ box.subItems.length }}</div>
-                        <div @click="toggleContent(i)">Cost {{ box.weight * getCostPerKillo() }}</div>
+                        <div @click="toggleContent(i)">Number of Boxes: {{ box.numberOfBoxes }}</div>
+                        <div @click="toggleContent(i)">Box Weight: {{ box.boxWeight }}</div>
+                        <div @click="toggleContent(i)">Total Adjusted Weight: {{ getTotalAdjustedWeight(i).toFixed(2) }}</div>
+                        <div @click="toggleContent(i)">Total Cost of Boxes: {{ getTotalCostOfBoxes(i).toFixed(2) }}</div>
                         <div @click="toggleContent(i)">SKU:
                             <span class="box-sku-numbers">
                                 <span v-for="(subItem, i) in box.subItems" :key="i" class="box-sku-number">{{ subItem.sku }}</span>
@@ -347,7 +348,7 @@
 
                         <div class="inline-form-field"> 
                             <label for="number_of_boxes_in_tracking">Number of boxes in tracking</label>
-                            <input v-model="trackingNumberForm.numberOfBoxesInTracking" id="number_of_boxes_in_tracking" name="number_of_boxes_in_tracking" type="number" class="form-control" required>
+                            <input v-model="trackingNumberForm.numberOfBoxesInTracking" id="number_of_boxes_in_tracking" name="number_of_boxes_in_tracking" type="text" class="form-control" required>
                         </div>
 
                         <div class="inline-form-field"> 
@@ -374,17 +375,17 @@
                     <form action="" @submit.prevent="handleProductBoxForm">
                         <div class="inline-form-field dimentions">
                             <label for="dimentions">Dimentions</label>
-                            <input name="add_box_dimentions1" id="dimentions1" type="number" class="form-control" placeholder="cm" v-model="productBoxForm.dimention1" required>
-                            <input name="add_box_dimentions2" id="add_box_dimentions2" type="number" class="form-control" v-model="productBoxForm.dimention2" required>
-                            <input name="add_box_dimentions3" id="add_box_dimentions3" type="number" class="form-control" v-model="productBoxForm.dimention3" required>
+                            <input name="add_box_dimentions1" id="dimentions1" type="text" class="form-control" placeholder="cm" v-model="productBoxForm.dimention1" required>
+                            <input name="add_box_dimentions2" id="add_box_dimentions2" type="text" class="form-control" v-model="productBoxForm.dimention2" required>
+                            <input name="add_box_dimentions3" id="add_box_dimentions3" type="text" class="form-control" v-model="productBoxForm.dimention3" required>
                         </div>
                         <div class="inline-form-field weight">
                             <label for="add_box_weight">Weight</label>
-                            <input name="add_box_weight" id="add_box_weight" type="number" class="form-control" placeholder="kg" v-model="productBoxForm.weight" required>
+                            <input name="add_box_weight" id="add_box_weight" type="text" class="form-control" placeholder="kg" v-model="productBoxForm.boxWeight" required>
                         </div>
                         <div class="inline-form-field weight">
                             <label for="add_box_number_of_boxes">Number of boxes</label>
-                            <input name="add_box_number_of_boxes" id="number_of_boxes" type="number" class="form-control" v-model="productBoxForm.numberOfBoxes" required>
+                            <input name="add_box_number_of_boxes" id="number_of_boxes" type="text" class="form-control" v-model="productBoxForm.numberOfBoxes" required>
                             <button class="add-box-save">Save</button>
                         </div>
                     </form>
@@ -405,11 +406,11 @@
                         </div>
                         <div class="inline-form-field weight">
                             <label for="add_sub_box_qty">Qty</label>
-                            <input name="add_sub_box_qty" id="add_sub_box_qty" type="number" class="form-control" v-model="subItemForm.qty" required>
+                            <input name="add_sub_box_qty" id="add_sub_box_qty" type="text" class="form-control" v-model="subItemForm.qty" required>
                         </div>
                         <div class="inline-form-field weight">
                             <label for="add_sub_box_cost_per_item">Cost per Item</label>
-                            <input name="add_sub_box_cost_per_item" id="add_sub_box_cost_per_item" type="number" class="form-control" v-model="subItemForm.costPerItem" required>
+                            <input name="add_sub_box_cost_per_item" id="add_sub_box_cost_per_item" type="text" class="form-control" v-model="subItemForm.costPerItem" required>
                             <button class="add-box-save">Save</button>
                         </div>
                     </form>

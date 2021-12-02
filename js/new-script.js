@@ -2,7 +2,8 @@ var app = new Vue({
     el: '#main',
     data: {
         //Main form
-        totalCost: 0,
+        totalCost: 573.3,
+        totalWeight: 45.5,
 
         //For tracking numbers
 
@@ -29,41 +30,48 @@ var app = new Vue({
             dimention1: null,
             dimention2: null,
             dimention3: null,
-            weight: null,
-            numberOfBoxes: null
+            numberOfBoxes: null,
+            boxWeight: null
         },
         productBoxes: [
             //Prepopulated data
             {
                 expanded: false,
+                numberOfBoxes: 2,
+                boxWeight: 11,
                 dimentions: {
-                    dimention1: 10,
-                    dimention2: 20,
-                    dimention3: 30,
+                    dimention1: 52,
+                    dimention2: 41,
+                    dimention3: 31,
                 },
-                weight: 40,
-                numberOfBoxes: 50,
-                costOfBox: 99,
                 subItems: [
-                    {sku: 'SKU1', qty: 60, costPerItem: 70},
-                    {sku: 'SKU2', qty: 80, costPerItem: 90},
-                    {sku: 'SKU3', qty: 100, costPerItem: 110}
+                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 70}
                 ]
             },
             {
                 expanded: false,
+                numberOfBoxes: 1,
+                boxWeight: 10.7,
                 dimentions: {
-                    dimention1: 60,
-                    dimention2: 70,
-                    dimention3: 80,
+                    dimention1: 52,
+                    dimention2: 41,
+                    dimention3: 31,
                 },
-                weight: 90,
-                numberOfBoxes: 100,
-                costOfBox: 99,
                 subItems: [
-                    {sku: 'SKU4', qty: 60, costPerItem: 70},
-                    {sku: 'SKU5', qty: 80, costPerItem: 90},
-                    {sku: 'SKU6', qty: 100, costPerItem: 110}
+                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 70}
+                ]
+            },
+            {
+                expanded: false,
+                numberOfBoxes: 1,
+                boxWeight: 5,
+                dimentions: {
+                    dimention1: 52,
+                    dimention2: 41,
+                    dimention3: 31,
+                },
+                subItems: [
+                    {sku: 'GPL6PBA-CL', qty: 60, costPerItem: 70}
                 ]
             }
         ],
@@ -151,50 +159,22 @@ var app = new Vue({
         },
         handleProductBoxForm(){
             if(this.productBoxFormMode == 'save'){
-                var subItemsToAdd = parseInt(this.productBoxForm.numberOfBoxes);
-                var subItemArray = [];
 
-                for (let i = 0; i < subItemsToAdd; i++) {
-                    subItemArray.push({sku: 'SKU', qty: 0, costPerItem: 0});
-                }
-                this.productBoxes.push({ 
+                this.productBoxes.push({
                     expanded: false,
+                    numberOfBoxes: parseFloat(this.productBoxForm.numberOfBoxes),
+                    boxWeight: parseFloat(this.productBoxForm.boxWeight),
                     dimentions: {
-                        dimention1: this.productBoxForm.dimention1,
-                        dimention2: this.productBoxForm.dimention2,
-                        dimention3: this.productBoxForm.dimention3, 
+                        dimention1: parseFloat(this.productBoxForm.dimention1),
+                        dimention2: parseFloat(this.productBoxForm.dimention2),
+                        dimention3: parseFloat(this.productBoxForm.dimention3),
                     },
-                    weight: this.productBoxForm.weight, 
-                    //numberOfBoxes: this.productBoxForm.numberOfBoxes,
-                    subItems: subItemArray
+                    subItems: []
                 });
+
             }else if(this.productBoxFormMode == 'update'){  
 
-                this.productBoxes[this.productToUpdate].dimentions.dimention1 = this.productBoxForm.dimention1;
-                this.productBoxes[this.productToUpdate].dimentions.dimention2 = this.productBoxForm.dimention2;
-                this.productBoxes[this.productToUpdate].dimentions.dimention3 = this.productBoxForm.dimention3;
-                this.productBoxes[this.productToUpdate].weight = this.productBoxForm.weight;
-
-                var subItemsToAdd = parseInt(this.productBoxForm.numberOfBoxes);
-                var subItemArray = this.productBoxes[this.productToUpdate].subItems;
-
-                if(subItemsToAdd > subItemArray.length){
-                    var numberOfItemShouldBeAdded = subItemsToAdd - subItemArray.length;
-                    //console.log(numberOfItemShouldBeAdded, ' items should be added');
-                    for (let i = 0; i < numberOfItemShouldBeAdded; i++) {
-                        subItemArray.push({sku: 'SKU', qty: 0, costPerItem: 0});
-                    }
-
-                }else if(subItemsToAdd < subItemArray.length){
-                    var numberOfItemShouldBeDeleted = subItemArray.length - subItemsToAdd;
-                    //console.log(numberOfItemShouldBeDeleted, ' items should be deleted');
-                    for (let i = 0; i < numberOfItemShouldBeDeleted; i++) {
-                        subItemArray.pop();
-                    }
-                }
-               
-                this.productBoxes[this.productToUpdate].subItems = subItemArray;
-                //console.log(subItemArray);
+                console.log('Updating');
             }
             this.closeProductBoxForm()
         },
@@ -252,7 +232,7 @@ var app = new Vue({
             this.closeSubBoxForm();
         },
         addSubItem(parentIndex){ 
-            this.productBoxes[parentIndex].expanded = true; //************************************ */
+            this.productBoxes[parentIndex].expanded = true;
             this.subItemForm.parentIndex = parentIndex;
             this.openSubBoxForm();
         },
@@ -288,16 +268,41 @@ var app = new Vue({
         },
 
         //Getters
-        getTotalWeight(){
+        getCostPerKillo(){
+            var costPerKillo = this.totalCost / this.totalWeight;
+            return costPerKillo;
+        },
+        getTotalNumberOfBoxes(){
             var value = 0;
-            for (var i = 0; i < this.productBoxes.length; i++) {
-                value += parseInt(this.productBoxes[i].weight);
+            for (let i = 0; i < this.productBoxes.length; i++) {
+                value += this.productBoxes[i].numberOfBoxes;
             }
             return value;
         },
-        getCostPerKillo(){
-            var costPerKillo = this.totalCost / this.getTotalWeight();
-            return costPerKillo;
+        getTotalBoxesWeight(){
+            var value = 0;
+            for (let i = 0; i < this.productBoxes.length; i++) {
+                value += this.productBoxes[i].numberOfBoxes * this.productBoxes[i].boxWeight;
+            }
+            return value;
+        },
+        getSingleBoxWeight(i){
+            var value = this.productBoxes[i].numberOfBoxes * this.productBoxes[i].boxWeight;
+            return value;
+        },
+        getTotalAdjustedWeight(i){
+            var thisBoxWeight = this.getSingleBoxWeight(i);
+
+            var totalWeight = this.totalWeight;
+            var totalBoxWeight = this.getTotalBoxesWeight();
+            var value = (totalWeight / totalBoxWeight) * thisBoxWeight;
+            return value;
+        },
+        getTotalCostOfBoxes(i){
+            var totalAdjustedWeight = this.getTotalAdjustedWeight(i);
+            var costPerKillo = this.getCostPerKillo()
+            var value = totalAdjustedWeight * costPerKillo;
+            return value;
         }
 
     }
