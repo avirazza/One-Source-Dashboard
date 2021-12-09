@@ -58,7 +58,7 @@
       <script type="text/javascript" src="https://www.onesourcesuppliers.com/js/jquery.dirty.js"></script>
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-      
+
       <script src="js/vue@2.6.14.js"></script>
       <link rel="stylesheet" href="css/new-styles.css">
    </head>
@@ -704,9 +704,9 @@
                             <div class="product-sub-box" v-for="(subItem, i) in box.subItems" :key="i">
                                 <div>SKU: {{subItem.sku}}</div>
                                 <div>QTY: {{subItem.qty}}</div>
-                                <div>Cost per Item: {{subItem.costPerItem}}</div>
+                                <div>Cost per Item: {{ getCostPerItem(productBoxes.indexOf(box)).toFixed(2) }}</div>
                                 <div class="sub-box-action-buttons">
-                                    <i aria-hidden="true" class="fa fa-pencil edit-box"></i>
+                                    <i aria-hidden="true" class="fa fa-pencil edit-box" @click="updateSku(productBoxes.indexOf(box),i)"></i>
                                     <i aria-hidden="true" class="fa fa-trash delete-box" @click="deleteSubBox(productBoxes.indexOf(box),i)"></i>
                                 </div>
                             </div>

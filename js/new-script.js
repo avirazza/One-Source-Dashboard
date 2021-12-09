@@ -5,11 +5,7 @@ var app = new Vue({
         totalCost: 573.3,
         totalWeight: 45.5,
 
-        // totalCost: null,
-        // totalWeight: null,
-
         //For tracking numbers
-
         trackingNumberFormVisible: false,
         trackingNumberFormMode: 'save',
         trackingNumberToUpdate: null,
@@ -48,7 +44,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 70}
+                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 0}
                 ]
             },
             {
@@ -62,7 +58,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 70}
+                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 0}
                 ]
             },
             {
@@ -76,7 +72,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'GPL6PBA-CL', qty: 60, costPerItem: 70}
+                    {sku: 'GPL6PBA-CL', qty: 60, costPerItem: 0}
                 ]
             }
         ],
@@ -100,7 +96,8 @@ var app = new Vue({
         //Adding Sku
         addingSkuTo: null,
         selectedProduct: null,
-        skuForm: {},
+        // skuForm: {},
+        skuFormMode: 'save',
         products: [
             {
                 name: 'Incipio Stylus Inscribe Executive Stylus And Pen With Black Ink',
@@ -354,39 +351,44 @@ var app = new Vue({
         handleSkuForm(){
             var product = this.selectedProduct;
             var qty = 0;
+            var skuFormMode = this.skuFormMode;
 
-            if(product.type == 'product'){
-                for (let i = 0; i < product.po.length; i++) {
-
-                    let totalQty = parseInt(product.po[i].totalQty);
-                    let qtyArrived = parseInt(product.po[i].qtyArrived);
-                    
-                    if(totalQty > qtyArrived){
-                        qty += qtyArrived;
-                    }
-                }
-            }else if(product.type == 'kit'){
-                for (let i = 0; i < product.components.length; i++) {
-                    let po = product.components[i].po;
-                    for (let i = 0; i < po.length; i++) {
-
-                        let totalQty = parseInt(po[i].totalQty);
-                        let qtyArrived = parseInt(po[i].qtyArrived);
+            if(skuFormMode == 'save'){
+                if(product.type == 'product'){
+                    for (let i = 0; i < product.po.length; i++) {
+    
+                        let totalQty = parseInt(product.po[i].totalQty);
+                        let qtyArrived = parseInt(product.po[i].qtyArrived);
                         
                         if(totalQty > qtyArrived){
                             qty += qtyArrived;
                         }
                     }
+                }else if(product.type == 'kit'){
+                    for (let i = 0; i < product.components.length; i++) {
+                        let po = product.components[i].po;
+                        for (let i = 0; i < po.length; i++) {
+    
+                            let totalQty = parseInt(po[i].totalQty);
+                            let qtyArrived = parseInt(po[i].qtyArrived);
+                            
+                            if(totalQty > qtyArrived){
+                                qty += qtyArrived;
+                            }
+                        }
+                    }
                 }
+    
+                this.productBoxes[this.addingSkuTo].subItems.push(
+                    {
+                        sku: this.selectedProduct.sku, 
+                        qty: qty, 
+                        costPerItem: 0
+                    }
+                );
+            }else if(skuFormMode == 'update'){
+                console.log('Updating form');
             }
-
-            this.productBoxes[this.addingSkuTo].subItems.push(
-                {
-                    sku: this.selectedProduct.sku, 
-                    qty: qty, 
-                    costPerItem: 0
-                }
-            );
 
             this.closeSkuForm();
         },
@@ -395,67 +397,25 @@ var app = new Vue({
             this.productBoxes.splice(i, 1);
         },
 
-        /*
-        openSubBoxForm(){
-            this.subItemFormVisible = true;
-        },
-        closeSubBoxForm(){
-            this.subItemFormVisible = false;
+        updateSku(parent, child){
+            // this.openSkuForm();
 
-            this.subItemForm.parentIndex = null;
-            this.subItemForm.childIndex = null;
-            this.subItemForm.sku = null;
-            this.subItemForm.qty = null;
-            this.subItemForm.costPerItem = null;
-
-            this.subItemFormMode = 'save';
+            console.log('Updating sku');
         },
 
-        deleteBox(i){
-            this.productBoxes.splice(i, 1);
-        },
-        handleSubBoxForm(){
-            var parent = this.subItemForm.parentIndex;
-            var child = this.subItemForm.childIndex;
+        getCostPerItem(parent){
+            var totalAdjustedWeight = this.getTotalAdjustedWeight(parent);
+            var totalQuantity = 0;
+            var value = 0;
 
-            if(this.subItemFormMode == 'save'){
-                this.productBoxes[parent].subItems.push({ 
-                    sku: this.subItemForm.sku,
-                    qty: this.subItemForm.qty, 
-                    costPerItem: this.subItemForm.costPerItem
-                });
-
-            }else if(this.subItemFormMode == 'update'){ 
-                this.productBoxes[parent].subItems[child].sku = this.subItemForm.sku;
-                this.productBoxes[parent].subItems[child].qty = this.subItemForm.qty;
-                this.productBoxes[parent].subItems[child].costPerItem = this.subItemForm.costPerItem;
+            var subItems = this.productBoxes[parent].subItems;
+            for (let i = 0; i < subItems.length; i++) {
+                totalQuantity += parseInt(subItems[i].qty);
             }
-            //console.log('Parent :',parent, ' Child:',child );
-            this.closeSubBoxForm();
-        },
-        addSubItem(parentIndex){ 
-            this.productBoxes[parentIndex].expanded = true;
-            this.subItemForm.parentIndex = parentIndex;
-            this.openSubBoxForm();
-        },
-        editSubItem(parentIndex, childIndex){ 
-            this.subItemForm.parentIndex = parentIndex;
-            this.subItemForm.childIndex = childIndex;
 
-            this.subItemForm.sku = this.productBoxes[parentIndex].subItems[childIndex].sku;
-            this.subItemForm.qty = this.productBoxes[parentIndex].subItems[childIndex].qty;
-            this.subItemForm.costPerItem = this.productBoxes[parentIndex].subItems[childIndex].costPerItem;
-
-            this.subItemFormMode = 'update';
-            this.openSubBoxForm();
-        },
-        deleteSubBox(parentIndex, childIndex){
-            this.productBoxes[parentIndex].subItems.splice(childIndex, 1);
+            return totalAdjustedWeight / totalQuantity;
         },
 
-
-        */
-       
         deleteSubBox(parentIndex, childIndex){
             this.productBoxes[parentIndex].subItems.splice(childIndex, 1);
         },
