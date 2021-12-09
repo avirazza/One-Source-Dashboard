@@ -5,6 +5,9 @@ var app = new Vue({
         totalCost: 573.3,
         totalWeight: 45.5,
 
+        // totalCost: null,
+        // totalWeight: null,
+
         //For tracking numbers
 
         trackingNumberFormVisible: false,
@@ -34,9 +37,9 @@ var app = new Vue({
             boxWeight: null
         },
         productBoxes: [
-            //Prepopulated data
             {
                 expanded: false,
+                skuSelectorVisible: false,
                 numberOfBoxes: 2,
                 boxWeight: 11,
                 dimentions: {
@@ -50,6 +53,7 @@ var app = new Vue({
             },
             {
                 expanded: false,
+                skuSelectorVisible: false,
                 numberOfBoxes: 1,
                 boxWeight: 10.7,
                 dimentions: {
@@ -63,6 +67,7 @@ var app = new Vue({
             },
             {
                 expanded: false,
+                skuSelectorVisible: false,
                 numberOfBoxes: 1,
                 boxWeight: 5,
                 dimentions: {
@@ -90,7 +95,137 @@ var app = new Vue({
         },
 
         //Final form submit
-        showGenerateBillPopup: false
+        showGenerateBillPopup: false,
+
+        //Adding Sku
+        addingSkuTo: null,
+        selectedProduct: null,
+        skuForm: {},
+        products: [
+            {
+                name: 'Incipio Stylus Inscribe Executive Stylus And Pen With Black Ink',
+                thumbnail: 'http://placehold.jp/50x50.png',
+                qrn: '598064',
+                mpn: 'STYLUSPENBLK',
+                upc: '814523450040',
+                sku: 'STY_INCIP_B',
+                manufacturer: 'Incipio',
+                status: 'Disabled',
+                created: '12/31/15',
+                price: '5.99',
+                available: 0,
+                type: 'product',
+                po: [
+                    {number: 101, totalQty: 3000, qtyArrived: 3000},
+                    {number: 102, totalQty: 2000, qtyArrived: null},
+                    {number: 103, totalQty: 2000, qtyArrived: null}
+                ]
+            },
+            {
+                name: 'Mini Stylus - Iphone / Touch Screen - Pink',
+                thumbnail: 'http://placehold.jp/50x50.png',
+                qrn: '567143',
+                mpn: null,
+                upc: null,
+                sku: 'IP4STY-MINI-P',
+                manufacturer: 'Base',
+                status: 'Hidden',
+                created: '12/31/15',
+                price: '3.50',
+                available: 0,
+                type: 'kit',
+                components: [
+                    {
+                        name: 'Component 1',
+                        po: [
+                            {number: 104, totalQty: 3000, qtyArrived: 3000},
+                            {number: 105, totalQty: 2000, qtyArrived: null},
+                            {number: 106, totalQty: 2000, qtyArrived: null}
+                        ]
+                    },
+                    {
+                        name: 'Component 2',
+                        po: [
+                            {number: 104, totalQty: 3000, qtyArrived: 3000},
+                            {number: 105, totalQty: 2000, qtyArrived: null},
+                            {number: 106, totalQty: 2000, qtyArrived: null}
+                        ]
+                    },
+                    
+                ]
+            },
+            {
+                name: 'Sports Armband Iphone 5 Holder',
+                thumbnail: 'http://placehold.jp/50x50.png',
+                qrn: '543206',
+                mpn: null,
+                upc: null,
+                sku: 'IP5ARMBAND',
+                manufacturer: 'Sports',
+                status: 'Disabled',
+                created: '12/31/15',
+                price: '6.90',
+                available: 1065,
+                type: 'product',
+                po: [
+                    {number: 107, totalQty: 3000, qtyArrived: 3000},
+                    {number: 108, totalQty: 2000, qtyArrived: null},
+                    {number: 109, totalQty: 2000, qtyArrived: null}
+                ]
+            },
+            {
+                name: 'ipad Stylus - Black',
+                thumbnail: 'http://placehold.jp/50x50.png',
+                qrn: '724400',
+                mpn: null,
+                upc: null,
+                sku: 'IP4STYLUS-B',
+                manufacturer: 'Base',
+                status: 'Hidden',
+                created: '12/31/15',
+                price: '4.50',
+                available: 1065,
+                type: 'kit',
+                components: [
+                    {
+                        name: 'Component 1',
+                        po: [
+                            {number: 110, totalQty: 3000, qtyArrived: 3000},
+                            {number: 111, totalQty: 2000, qtyArrived: null},
+                            {number: 112, totalQty: 2000, qtyArrived: null}
+                        ]
+                    },
+                    {
+                        name: 'Component 2',
+                        po: [
+                            {number: 110, totalQty: 3000, qtyArrived: 3000},
+                            {number: 111, totalQty: 2000, qtyArrived: null},
+                            {number: 112, totalQty: 2000, qtyArrived: null}
+                        ]
+                    },
+                    
+                ]
+            },
+            {
+                name: 'Micro Data Cable',
+                thumbnail: 'http://placehold.jp/50x50.png',
+                qrn: '474190',
+                mpn: null,
+                upc: '081462717033',
+                sku: 'AMMICRODK',
+                manufacturer: 'Base',
+                status: 'Disabled',
+                created: '12/31/15',
+                price: '2.99',
+                available: 1065,
+                type: 'product',
+                po: [
+                    {number: 113, totalQty: 3000, qtyArrived: 3000},
+                    {number: 114, totalQty: 2000, qtyArrived: null},
+                    {number: 115, totalQty: 2000, qtyArrived: null}
+                ]
+            }
+        ]
 
     },
     methods: {
@@ -162,6 +297,7 @@ var app = new Vue({
 
                 this.productBoxes.push({
                     expanded: false,
+                    skuSelectorVisible: false,
                     numberOfBoxes: parseFloat(this.productBoxForm.numberOfBoxes),
                     boxWeight: parseFloat(this.productBoxForm.boxWeight),
                     dimentions: {
@@ -192,8 +328,74 @@ var app = new Vue({
             this.openProductBoxForm();
         },
 
-        //For sub items
-        
+        //Adding Sku
+
+        openSkuSelector(i){
+            this.productBoxes[i].expanded = true;
+            this.productBoxes[i].skuSelectorVisible = true;
+            this.addingSkuTo = i;
+        },
+        openSkuForm(parentBox, product){
+            this.addingSkuTo = parentBox;
+            this.selectedProduct = product;
+            this.subItemFormVisible = true;
+        },
+        closeSkuForm(){
+            this.addingSkuTo = null;
+            this.selectedProduct = null;
+            this.subItemFormVisible = false;
+            this.addingSkuTo = null;
+        },
+        // addSku(parentBox, product){ 
+        //     this.productBoxes[parentBox].subItems.push(
+        //         {sku: product.sku, qty: 0, costPerItem: 0}
+        //     );
+        // },
+        handleSkuForm(){
+            var product = this.selectedProduct;
+            var qty = 0;
+
+            if(product.type == 'product'){
+                for (let i = 0; i < product.po.length; i++) {
+
+                    let totalQty = parseInt(product.po[i].totalQty);
+                    let qtyArrived = parseInt(product.po[i].qtyArrived);
+                    
+                    if(totalQty > qtyArrived){
+                        qty += qtyArrived;
+                    }
+                }
+            }else if(product.type == 'kit'){
+                for (let i = 0; i < product.components.length; i++) {
+                    let po = product.components[i].po;
+                    for (let i = 0; i < po.length; i++) {
+
+                        let totalQty = parseInt(po[i].totalQty);
+                        let qtyArrived = parseInt(po[i].qtyArrived);
+                        
+                        if(totalQty > qtyArrived){
+                            qty += qtyArrived;
+                        }
+                    }
+                }
+            }
+
+            this.productBoxes[this.addingSkuTo].subItems.push(
+                {
+                    sku: this.selectedProduct.sku, 
+                    qty: qty, 
+                    costPerItem: 0
+                }
+            );
+
+            this.closeSkuForm();
+        },
+
+        deleteBox(i){
+            this.productBoxes.splice(i, 1);
+        },
+
+        /*
         openSubBoxForm(){
             this.subItemFormVisible = true;
         },
@@ -250,6 +452,14 @@ var app = new Vue({
         deleteSubBox(parentIndex, childIndex){
             this.productBoxes[parentIndex].subItems.splice(childIndex, 1);
         },
+
+
+        */
+       
+        deleteSubBox(parentIndex, childIndex){
+            this.productBoxes[parentIndex].subItems.splice(childIndex, 1);
+        },
+
         toggleContent(i){
             this.productBoxes[i].expanded = !this.productBoxes[i].expanded;
         },

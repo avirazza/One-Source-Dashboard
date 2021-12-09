@@ -530,3 +530,25 @@ span.box-sku-numbers .box-sku-number:last-child:after {
 .box-action-buttons {
     max-width: 50px;
 }
+
+.sku-picker {
+    margin: 0 12px;
+}
+
+.sku-form-component {
+    display: flex;
+}
+
+.sku-form-component .component-details {
+    margin-right: 20px;
+    padding-top: 5px;
+    display: flex;
+}
+
+.component-details input[type="checkbox"]{
+    margin-right: 10px;
+}
+
+.submit-button-right {
+    text-align: right;
+}
