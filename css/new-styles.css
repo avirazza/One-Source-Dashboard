@@ -552,3 +552,19 @@ span.box-sku-numbers .box-sku-number:last-child:after {
 .submit-button-right {
     text-align: right;
 }
+
+/* Reciving record */
+
+.reciving-record .search-filter {
+    max-width: unset;
+}
+
+.reciving-record span.filter-label {
+    font-size: unset;
+}
+
+.reciving-record .table-filter {
+    background-color: #FAFAFA;
+    margin-top: 0px;
+    border-bottom: 1px solid #ddd;
+}
