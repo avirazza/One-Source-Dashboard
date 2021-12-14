@@ -447,8 +447,9 @@ input:read-only {
     opacity: 0;
 }
 
-.add-box-form-wrap.active{
+.add-box-form-wrap.active {
     opacity: 1;
+    z-index: 99999;
 }
 
 .add-box-outer {
@@ -576,4 +577,10 @@ span.box-sku-numbers .box-sku-number:last-child:after {
 .create-new-tabs.no-padding {
     padding: 0;
     margin-bottom: 20px;
+}
+
+i.fa.fa-bell-o.invalid {
+    color: #fff;
+    background: red;
+    border-color: red;
 }
