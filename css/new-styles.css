@@ -584,3 +584,30 @@ i.fa.fa-bell-o.invalid {
     background: red;
     border-color: red;
 }
+
+.number_of_boxes_recived_field {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.number_of_boxes_recived_field input[type="number"] {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.number_of_boxes_recived_field label {
+    margin-right: 20px;
+    font-weight: 400;
+}
+
+.number_of_boxes_recived_field input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}

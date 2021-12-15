@@ -8,6 +8,7 @@ var app = new Vue({
                 skuSelectorVisible: false,
                 numberOfBoxes: 2,
                 boxWishToRecive: null,
+                checkedAll: false,
                 boxWeight: 11,
                 dimentions: {
                     dimention1: 52,
@@ -23,6 +24,7 @@ var app = new Vue({
                 skuSelectorVisible: false,
                 numberOfBoxes: 1,
                 boxWishToRecive: null,
+                checkedAll: false,
                 boxWeight: 10.7,
                 dimentions: {
                     dimention1: 52,
@@ -38,6 +40,7 @@ var app = new Vue({
                 skuSelectorVisible: false,
                 numberOfBoxes: 1,
                 boxWishToRecive: null,
+                checkedAll: false,
                 boxWeight: 5,
                 dimentions: {
                     dimention1: 52,
@@ -59,8 +62,13 @@ var app = new Vue({
             var boxWishToRecive = this.productBoxes[i].boxWishToRecive;
 
             if(boxWishToRecive > numberOfBoxes){
+                this.productBoxes[i].checkedAll = false;
                 return true;
-            }else{
+            }else if(boxWishToRecive == numberOfBoxes){
+                this.productBoxes[i].checkedAll = true;
+            }
+            else{
+                this.productBoxes[i].checkedAll = false;
                 return false;
             }
         },
@@ -100,7 +108,17 @@ var app = new Vue({
         allocateItemsTowardsPos(){
             this.closePartiallyRecivedPopup();
             console.log('Allocatoing items towards POs');
-        } 
-
+        },
+        reciveThisBoxFully(i){
+            var value = this.productBoxes[i].checkedAll;
+            if(value){
+                this.productBoxes[i].boxWishToRecive = this.productBoxes[i].numberOfBoxes;
+            }else{
+                this.productBoxes[i].boxWishToRecive = null;
+            }
+        }
+    },
+    mounted(){
+        $('select').select2();
     }
 })
