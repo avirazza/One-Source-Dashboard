@@ -68,7 +68,8 @@
         <!-- Dirty form detection -->
         <script type="text/javascript" src="https://www.onesourcesuppliers.com/js/jquery.dirty.js"></script>
 
-        <!-- New Stylesheets -->
+        <!-- New scripts -->
+        <script src="js/vue@2.6.14.js"></script>
         <link rel="stylesheet" href="font-awesome/css/all.min.css">
         <link rel="stylesheet" href="css/new-styles.css">
 	</head>
@@ -195,374 +196,46 @@
         <div class="col-md-12">
             <div class="list-heading">
                 Products
-                <form action="">
+                <form class="inline-search-form">
                     <label for="search">Search</label>
-                    <input type="test" id="search">
+                    <input type="text" id="search" class="form-control">
                 </form>
             </div>
 
             <div class="product-list">
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
+                <div class="single-product-tab" v-for="(product, i) in products">
+                    <div class="product-tab-heading" @click.self="toggleTab(i)">
+                        <div class="product-tab-inline" @click.self="toggleTab(i)">
+                            <span class="product-variation-toggle" @click.self="toggleTab(i)">
+                                <i class="far fa-plus-square" v-if="!product.expanded"></i>
+                                <i class="far fa-minus-square" v-else></i>
+                            </span>
+
+                            <span class="product-name" @click.self="toggleTab(i)">{{ product.title }} ... <b>{{ product.sku }}</b></span>
+                        </div>
+                        <span class="in-inventory" @click.self="toggleTab(i)">({{ product.availableInInventory }} in inventory)</span>
+                        <span class="inbound" @click.self="toggleTab(i)">{{ product.inbound }} Inbound</span>
+                        <span class="inboavg-shippingund" @click.self="toggleTab(i)">AVG Shipping Cost per Item : {{ product.avgShippingCostPerItem }}</span>
+                        <span class="number-of-shipments" @click.self="toggleTab(i)">Number of Shipments : {{ product.numberOfShipments }}</span>
                         <span class="product-open-icon">
                             <a href="#"><i class="fas fa-external-link-alt"></i></a>
                         </span>
                     </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
+
+                    <div class="product-tab-content" v-if="product.expanded">
+                        <p v-if="product.shippingManifests.length <= 0">No shipping manifest</p>
+                        <div class="product-variation" v-for="(shippingManifest, i) in product.shippingManifests">
+                            <span>Shipment Manifest # : {{ shippingManifest.number }}</span>
+                            <span>QTY : {{ shippingManifest.qty }}</span>
+                            <span>Shipment Status : {{ shippingManifest.status }}</span>
+                            <span>Cost per item  <span>${{ shippingManifest.costPerItem }}</span> </span>
                             <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
+                                <a href="#" @click.prevent="deleteShippingManifest(products.indexOf(product),i)"><i class="fas fa-trash-alt"></i></a>
                                 <a href="#"><i class="fas fa-external-link-alt"></i></a>
                             </span>
                         </div>
                     </div>
                 </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-product-tab">
-                    <div class="product-tab-heading">
-                        <span class="product-variation-toggle"><i class="far fa-plus-square"></i></span>
-                        <span class="product-name">Powerpeak Quick Change 3.0 Dial Port Car Charger ... <b>VPCQC3.0-TYC/M</b></span>
-                        <span class="in-inventory">(324 In Inventory)</span>
-                        <span class="inbound">254 Inbound</span>
-                        <span class="inboavg-shippingund">AVG Shipping Cost per Item</span>
-                        <span class="number-of-shipments">Number of Shipments</span>
-                        <span class="product-open-icon">
-                            <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                        </span>
-                    </div>
-                    <div class="product-tab-content">
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                        <div class="product-variation">
-                            <span>Shipment Manifest #</span>
-                            <span>QTY</span>
-                            <span>Shipment Status</span>
-                            <span>Cost per item  <span>$2012</span> </span>
-                            <span class="action-icons">
-                                <a href="#"><i class="fas fa-trash-alt"></i></a>
-                                <a href="#"><i class="fas fa-external-link-alt"></i></a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
         </div>
@@ -625,15 +298,8 @@
 		<script type="text/javascript" src="https://www.onesourcesuppliers.com/template_assets/js/main.js"></script>
 		<script type="text/javascript" src="https://www.onesourcesuppliers.com/template_assets/js/app.js?v=31"></script>
 		<script type="text/javascript" src="https://www.onesourcesuppliers.com/template_assets/js/ajax.js?v=6"></script>
-
-					<script>
-                $(function(){
-                    //initNotes();
-					
-					                });
-            </script>
         
         <!-- New script -->
-        <script src="js/new-script.js"></script>
+        <script src="js/in-transit.js"></script>
 	</body>
 </html>

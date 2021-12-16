@@ -143,7 +143,7 @@ span.product-variation-toggle i {
 .product-tab-content {
     border: 1px solid #ddd;
     padding: 20px;
-    display: none;
+    /* display: none; */
 }
 
 .product-variation {
@@ -610,4 +610,29 @@ i.fa.fa-bell-o.invalid {
   -o-transform: scale(1.5); /* Opera */
   transform: scale(1.5);
   padding: 10px;
+}
+
+/* Shipping manifest */
+
+.inline-search-form {
+    display: flex;
+    align-items: center;
+}
+
+.inline-search-form label{
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+
+.single-product-tab{
+    cursor: pointer;
+}
+
+.product-tab-inline{
+    display: flex;
+    align-items: center;
+}
+
+.product-tab-inline .product-variation-toggle{
+    margin-right: 10px;
 }
