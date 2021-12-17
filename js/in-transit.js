@@ -7,12 +7,10 @@ var app = new Vue({
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/A',
                 availableInInventory: 324,
-                inbound: 254,
-                avgShippingCostPerItem: 10,
                 numberOfShipments: 20,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 101, dateShipped: '17-Dec-2021', qty: 20300, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 102, dateShipped: '17-Dec-2021', qty: 15000, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
@@ -20,38 +18,32 @@ var app = new Vue({
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/B',
                 availableInInventory: 325,
-                inbound: 255,
-                avgShippingCostPerItem: 11,
                 numberOfShipments: 21,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 103, dateShipped: '17-Dec-2021', qty: 20300, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 104, dateShipped: '17-Dec-2021', qty: 10300, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
                 expanded: false,
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/C',
-                availableInInventory: 326,
-                inbound: 256,
                 avgShippingCostPerItem: 12,
                 numberOfShipments: 22,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 105, dateShipped: '17-Dec-2021', qty: 20300, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 106, dateShipped: '17-Dec-2021', qty: 1000, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
                 expanded: false,
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/D',
-                availableInInventory: 327,
-                inbound: 257,
                 avgShippingCostPerItem: 13,
                 numberOfShipments: 23,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 107, dateShipped: '17-Dec-2021', qty: 20300, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 108, dateShipped: '17-Dec-2021', qty: 200, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
@@ -59,12 +51,10 @@ var app = new Vue({
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/E',
                 availableInInventory: 328,
-                inbound: 258,
-                avgShippingCostPerItem: 14,
                 numberOfShipments: 24,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 109, dateShipped: '17-Dec-2021', qty: 20300, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 110, dateShipped: '17-Dec-2021', qty: 15000, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
@@ -72,25 +62,21 @@ var app = new Vue({
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
                 sku: 'VPCQC3.0-TYC/F',
                 availableInInventory: 329,
-                inbound: 259,
-                avgShippingCostPerItem: 15,
                 numberOfShipments: 25,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 111, dateShipped: '17-Dec-2021', qty: 15000, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 112, dateShipped: '17-Dec-2021', qty: 10000, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
             {
                 expanded: false,
                 title: 'Powerpeak Quick Change 3.0 Dial Port Car Charger',
-                sku: 'VPCQC3.0-TYC/G',
-                availableInInventory: 330,
-                inbound: 260,
-                avgShippingCostPerItem: 16,
-                numberOfShipments: 26,
+                sku: 'VPCQC3.0-TYC/F',
+                availableInInventory: 329,
+                numberOfShipments: 25,
                 shippingManifests: [
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20},
-                    {number: 101, qty: 100, status: 'Delivered', costPerItem: 20}
+                    {number: 111, dateShipped: '17-Dec-2021', qty: 15000, status: 'Delivered', shippingCostPerItem: .36},
+                    {number: 112, dateShipped: '17-Dec-2021', qty: 10000, status: 'Delivered', shippingCostPerItem: .45}
                 ]
             },
 
@@ -102,7 +88,25 @@ var app = new Vue({
         },
         deleteShippingManifest(prooduct, i){
             this.products[prooduct].shippingManifests.splice(i, 1);
-            ///console.log(prooduct, i);
+        },
+        getTotalInbound(i){
+            value = 0;
+            var shippingManifests = this.products[i].shippingManifests;
+
+            shippingManifests.forEach(shippingManifest => {
+                value += shippingManifest.qty;
+            });
+
+            return value;
+        },
+        getAvgShppingCostPerItem(i){
+            var shippingManifests = this.products[i].shippingManifests;
+            var allShippingCost = 0;
+            var numberOfShippingManifests = shippingManifests.length;
+            shippingManifests.forEach(shippingManifest => {
+                allShippingCost += shippingManifest.shippingCostPerItem;
+            });
+            return allShippingCost / numberOfShippingManifests;
         }
         
     },
