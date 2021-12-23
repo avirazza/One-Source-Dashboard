@@ -416,6 +416,14 @@
                            <div class="product-sub-box" v-for="(subItem, i) in box.subItems" :key="i">
                                <div>SKU: {{subItem.sku}}</div>
                                <div>QTY: {{subItem.qty}}</div>
+                               <div>
+                                 <div class="number_of_boxes_recived_field">
+                                    <label :for="'qty_recived_'+productBoxes.indexOf(box)+'_'+i">QTY Recived:</label> 
+                                    <input v-bind:class="{ error: subItem.qtyReviced > subItem.qty }"v-model="subItem.qtyReviced" :id="'qty_recived_'+productBoxes.indexOf(box)+'_'+i" type="number" class="form-control"> 
+                                    <!-- <input type="checkbox"> -->
+                                 </div>
+                                  <!-- QTY Recived : <input v-model="subItem.qtyReviced" type="number" class="form-control"> -->
+                               </div>
                                <div>Cost per Item: {{subItem.costPerItem}}</div>
                            </div>
 

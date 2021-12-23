@@ -636,3 +636,7 @@ i.fa.fa-bell-o.invalid {
 .product-tab-inline .product-variation-toggle{
     margin-right: 10px;
 }
+
+.form-control.error {
+    border-color: red;
+}

@@ -16,7 +16,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 100}
+                    {sku: 'IP7PTGSP', qty: 60, qtyReviced: 0, costPerItem: 100}
                 ]
             },
             {
@@ -32,7 +32,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'IP7PTGSP', qty: 60, costPerItem: 200}
+                    {sku: 'IP7PTGSP', qty: 60, qtyReviced: 0, costPerItem: 200}
                 ]
             },
             {
@@ -48,7 +48,7 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'GPL6PBA-CL', qty: 60, costPerItem: 300}
+                    {sku: 'GPL6PBA-CL', qty: 60, qtyReviced: 0, costPerItem: 300}
                 ]
             }
         ]
@@ -76,6 +76,9 @@ var app = new Vue({
             var boxes = this.productBoxes;
             boxes.forEach(function (item) {
                 item.boxWishToRecive = item.numberOfBoxes;
+                item.subItems.forEach(function(subItem){
+                    subItem.qtyReviced = subItem.qty;
+                });
             });
         },
         handleFullyRecived(){
@@ -113,6 +116,10 @@ var app = new Vue({
             var value = this.productBoxes[i].checkedAll;
             if(value){
                 this.productBoxes[i].boxWishToRecive = this.productBoxes[i].numberOfBoxes;
+                //console.log( this.productBoxes[i].subItems );
+                this.productBoxes[i].subItems.forEach(function(subitem){
+                    subitem.qtyReviced = subitem.qty;
+                });
             }else{
                 this.productBoxes[i].boxWishToRecive = null;
             }
