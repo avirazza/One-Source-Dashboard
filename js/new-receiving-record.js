@@ -72,6 +72,22 @@ var app = new Vue({
                 return false;
             }
         },
+        checkSkuValidity(i){
+            var box = this.productBoxes[i];
+            var totalQty = 0;
+            var totalQtyRecived = 0;
+
+            box.subItems.forEach(function(item){
+                totalQty += item.qty;
+                totalQtyRecived += parseInt(item.qtyReviced);
+            });
+
+            if(totalQtyRecived != 0 && totalQty != totalQtyRecived){
+                return true;
+            }else{
+                return false;
+            }
+        },
         reciveAll(){
             var boxes = this.productBoxes;
             boxes.forEach(function (item) {
