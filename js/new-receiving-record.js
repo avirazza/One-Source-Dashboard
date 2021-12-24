@@ -16,7 +16,8 @@ var app = new Vue({
                     dimention3: 31,
                 },
                 subItems: [
-                    {sku: 'IP7PTGSP', qty: 60, qtyReviced: 0, costPerItem: 100}
+                    {sku: 'IP7PTGSP', qty: 60, qtyReviced: 0, costPerItem: 100},
+                    {sku: 'IP7PTGSQ', qty: 100, qtyReviced: 0, costPerItem: 200}
                 ]
             },
             {
@@ -139,6 +140,13 @@ var app = new Vue({
             }else{
                 this.productBoxes[i].boxWishToRecive = null;
             }
+        },
+        totalSkuInThisBox(i){
+            var total = 0;
+            this.productBoxes[i].subItems.forEach(function(subItem){
+                total += subItem.qty;
+            });
+            return total;
         }
     },
     mounted(){

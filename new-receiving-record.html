@@ -396,8 +396,9 @@
                        <div @click="toggleContent(i)">Number of Boxes: {{ box.numberOfBoxes }}</div>
                        <div @click="toggleContent(i)">SKU:
                            <span class="box-sku-numbers">
-                               <span v-for="(subItem, i) in box.subItems" :key="i" class="box-sku-number">{{ subItem.sku }}</span>
+                               <span v-for="(subItem, i) in box.subItems" :key="i" class="box-sku-number">{{ subItem.sku }} ({{ subItem.qty}})</span>
                            </span>
+                           {{ '&nbsp;&nbsp;-&nbsp;('+totalSkuInThisBox(i)+')' }}
                        </div>
                        <div class="number_of_boxes_recived_field"  @click.self="toggleContent(i)">
                           <label :for="'number_of_boxes_recived_'+i">Number of boxes received</label>
