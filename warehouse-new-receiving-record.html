@@ -160,8 +160,9 @@
                   <div id="content">
                      <div class="warehouse-init-form" v-if="pageState == 'initForm'">
                         <form style="text-align: center;" @submit.prevent="fetchProducts">
-                           <div class="inline-form-field weight"><input v-model="initForm.trackingNumber" type="nummber" placeholder="Tracking Number" required="required" class="form-control" style="width: 100%;"></div>
-                           <div class="inline-form-field weight"><input v-model="initForm.shippingManifestNumber" type="number" placeholder="Shipping Manifest Number" required="required" class="form-control" style="width: 100%;"></div>
+                           <div class="inline-form-field weight"><input v-model="initForm.trackingNumber" type="nummber" placeholder="Tracking Number" class="form-control" style="width: 100%;"></div>
+                           <label style="margin-bottom: 20px;">Or</label>
+                           <div class="inline-form-field weight"><input v-model="initForm.shippingManifestNumber" type="number" placeholder="Shipping Manifest Number" class="form-control" style="width: 100%;"></div>
                            <button class="add-box-save" style="margin: 0 auto;">Continue</button>
                      </div>
                      </form>
@@ -184,7 +185,7 @@
                                     <span class="box-sku-numbers">
                                     <span v-for="(subItem, i) in box.subItems" :key="i" class="box-sku-number">{{ subItem.sku }} ({{ subItem.qty}})</span>
                                     </span>
-                                    <span>{{ '&nbsp;&nbsp;-&nbsp;('+totalSkuInThisBox(i)+')' }}</span>
+                                    <span>{{ '&nbsp;&nbsp;-&nbsp;'+totalSkuInThisBox(i) }}</span>
                                  </div>
                                  <div class="number_of_boxes_recived_field"  @click.self="toggleContent(i)">
                                     <label :for="'number_of_boxes_recived_'+i">Number of boxes received</label>
