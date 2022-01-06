@@ -98,131 +98,7 @@ var app = new Vue({
         selectedProduct: null,
         // skuForm: {},
         skuFormMode: 'save',
-        products: [
-            {
-                name: 'Incipio Stylus Inscribe Executive Stylus And Pen With Black Ink',
-                thumbnail: 'http://placehold.jp/50x50.png',
-                qrn: '598064',
-                mpn: 'STYLUSPENBLK',
-                upc: '814523450040',
-                sku: 'STY_INCIP_B',
-                manufacturer: 'Incipio',
-                status: 'Disabled',
-                created: '12/31/15',
-                price: '5.99',
-                available: 0,
-                type: 'product',
-                po: [
-                    {number: 101, totalQty: 3000, qtyArrived: 3000},
-                    {number: 102, totalQty: 2000, qtyArrived: null},
-                    {number: 103, totalQty: 2000, qtyArrived: null}
-                ]
-            },
-            {
-                name: 'Mini Stylus - Iphone / Touch Screen - Pink',
-                thumbnail: 'http://placehold.jp/50x50.png',
-                qrn: '567143',
-                mpn: null,
-                upc: null,
-                sku: 'IP4STY-MINI-P',
-                manufacturer: 'Base',
-                status: 'Hidden',
-                created: '12/31/15',
-                price: '3.50',
-                available: 0,
-                type: 'kit',
-                components: [
-                    {
-                        name: 'Component 1',
-                        po: [
-                            {number: 104, totalQty: 3000, qtyArrived: 3000},
-                            {number: 105, totalQty: 2000, qtyArrived: null},
-                            {number: 106, totalQty: 2000, qtyArrived: null}
-                        ]
-                    },
-                    {
-                        name: 'Component 2',
-                        po: [
-                            {number: 104, totalQty: 3000, qtyArrived: 3000},
-                            {number: 105, totalQty: 2000, qtyArrived: null},
-                            {number: 106, totalQty: 2000, qtyArrived: null}
-                        ]
-                    },
-                    
-                ]
-            },
-            {
-                name: 'Sports Armband Iphone 5 Holder',
-                thumbnail: 'http://placehold.jp/50x50.png',
-                qrn: '543206',
-                mpn: null,
-                upc: null,
-                sku: 'IP5ARMBAND',
-                manufacturer: 'Sports',
-                status: 'Disabled',
-                created: '12/31/15',
-                price: '6.90',
-                available: 1065,
-                type: 'product',
-                po: [
-                    {number: 107, totalQty: 3000, qtyArrived: 3000},
-                    {number: 108, totalQty: 2000, qtyArrived: null},
-                    {number: 109, totalQty: 2000, qtyArrived: null}
-                ]
-            },
-            {
-                name: 'ipad Stylus - Black',
-                thumbnail: 'http://placehold.jp/50x50.png',
-                qrn: '724400',
-                mpn: null,
-                upc: null,
-                sku: 'IP4STYLUS-B',
-                manufacturer: 'Base',
-                status: 'Hidden',
-                created: '12/31/15',
-                price: '4.50',
-                available: 1065,
-                type: 'kit',
-                components: [
-                    {
-                        name: 'Component 1',
-                        po: [
-                            {number: 110, totalQty: 3000, qtyArrived: 3000},
-                            {number: 111, totalQty: 2000, qtyArrived: null},
-                            {number: 112, totalQty: 2000, qtyArrived: null}
-                        ]
-                    },
-                    {
-                        name: 'Component 2',
-                        po: [
-                            {number: 110, totalQty: 3000, qtyArrived: 3000},
-                            {number: 111, totalQty: 2000, qtyArrived: null},
-                            {number: 112, totalQty: 2000, qtyArrived: null}
-                        ]
-                    },
-                    
-                ]
-            },
-            {
-                name: 'Micro Data Cable',
-                thumbnail: 'http://placehold.jp/50x50.png',
-                qrn: '474190',
-                mpn: null,
-                upc: '081462717033',
-                sku: 'AMMICRODK',
-                manufacturer: 'Base',
-                status: 'Disabled',
-                created: '12/31/15',
-                price: '2.99',
-                available: 1065,
-                type: 'product',
-                po: [
-                    {number: 113, totalQty: 3000, qtyArrived: 3000},
-                    {number: 114, totalQty: 2000, qtyArrived: null},
-                    {number: 115, totalQty: 2000, qtyArrived: null}
-                ]
-            }
-        ]
+        products: null
 
     },
     methods: {
@@ -331,6 +207,9 @@ var app = new Vue({
             this.productBoxes[i].expanded = true;
             this.productBoxes[i].skuSelectorVisible = true;
             this.addingSkuTo = i;
+
+            //If you want to fetch the products when the sku selector is opened / the + icon is clicked do it here
+            this.fetchProducts();
         },
         openSkuForm(parentBox, product){
             this.addingSkuTo = parentBox;
@@ -473,7 +352,148 @@ var app = new Vue({
             var costPerKillo = this.getCostPerKillo()
             var value = totalAdjustedWeight * costPerKillo;
             return value;
-        }
+        },
+        fetchProducts(){
 
+            //This function is fetching the products, you can write the ajax code here or directly in the mounted hook / openSkuSelector function
+
+            // fetchedProductsByAjax array
+            var fetchedProductsByAjax = [
+                {
+                    name: 'Incipio Stylus Inscribe Executive Stylus And Pen With Black Ink',
+                    thumbnail: 'http://placehold.jp/50x50.png',
+                    qrn: '598064',
+                    mpn: 'STYLUSPENBLK',
+                    upc: '814523450040',
+                    sku: 'STY_INCIP_B',
+                    manufacturer: 'Incipio',
+                    status: 'Disabled',
+                    created: '12/31/15',
+                    price: '5.99',
+                    available: 0,
+                    type: 'product',
+                    po: [
+                        {number: 101, totalQty: 3000, qtyArrived: 3000},
+                        {number: 102, totalQty: 2000, qtyArrived: null},
+                        {number: 103, totalQty: 2000, qtyArrived: null}
+                    ]
+                },
+                {
+                    name: 'Mini Stylus - Iphone / Touch Screen - Pink',
+                    thumbnail: 'http://placehold.jp/50x50.png',
+                    qrn: '567143',
+                    mpn: null,
+                    upc: null,
+                    sku: 'IP4STY-MINI-P',
+                    manufacturer: 'Base',
+                    status: 'Hidden',
+                    created: '12/31/15',
+                    price: '3.50',
+                    available: 0,
+                    type: 'kit',
+                    components: [
+                        {
+                            name: 'Component 1',
+                            po: [
+                                {number: 104, totalQty: 3000, qtyArrived: 3000},
+                                {number: 105, totalQty: 2000, qtyArrived: null},
+                                {number: 106, totalQty: 2000, qtyArrived: null}
+                            ]
+                        },
+                        {
+                            name: 'Component 2',
+                            po: [
+                                {number: 104, totalQty: 3000, qtyArrived: 3000},
+                                {number: 105, totalQty: 2000, qtyArrived: null},
+                                {number: 106, totalQty: 2000, qtyArrived: null}
+                            ]
+                        },
+                        
+                    ]
+                },
+                {
+                    name: 'Sports Armband Iphone 5 Holder',
+                    thumbnail: 'http://placehold.jp/50x50.png',
+                    qrn: '543206',
+                    mpn: null,
+                    upc: null,
+                    sku: 'IP5ARMBAND',
+                    manufacturer: 'Sports',
+                    status: 'Disabled',
+                    created: '12/31/15',
+                    price: '6.90',
+                    available: 1065,
+                    type: 'product',
+                    po: [
+                        {number: 107, totalQty: 3000, qtyArrived: 3000},
+                        {number: 108, totalQty: 2000, qtyArrived: null},
+                        {number: 109, totalQty: 2000, qtyArrived: null}
+                    ]
+                },
+                {
+                    name: 'ipad Stylus - Black',
+                    thumbnail: 'http://placehold.jp/50x50.png',
+                    qrn: '724400',
+                    mpn: null,
+                    upc: null,
+                    sku: 'IP4STYLUS-B',
+                    manufacturer: 'Base',
+                    status: 'Hidden',
+                    created: '12/31/15',
+                    price: '4.50',
+                    available: 1065,
+                    type: 'kit',
+                    components: [
+                        {
+                            name: 'Component 1',
+                            po: [
+                                {number: 110, totalQty: 3000, qtyArrived: 3000},
+                                {number: 111, totalQty: 2000, qtyArrived: null},
+                                {number: 112, totalQty: 2000, qtyArrived: null}
+                            ]
+                        },
+                        {
+                            name: 'Component 2',
+                            po: [
+                                {number: 110, totalQty: 3000, qtyArrived: 3000},
+                                {number: 111, totalQty: 2000, qtyArrived: null},
+                                {number: 112, totalQty: 2000, qtyArrived: null}
+                            ]
+                        },
+                        
+                    ]
+                },
+                {
+                    name: 'Micro Data Cable',
+                    thumbnail: 'http://placehold.jp/50x50.png',
+                    qrn: '474190',
+                    mpn: null,
+                    upc: '081462717033',
+                    sku: 'AMMICRODK',
+                    manufacturer: 'Base',
+                    status: 'Disabled',
+                    created: '12/31/15',
+                    price: '2.99',
+                    available: 1065,
+                    type: 'product',
+                    po: [
+                        {number: 113, totalQty: 3000, qtyArrived: 3000},
+                        {number: 114, totalQty: 2000, qtyArrived: null},
+                        {number: 115, totalQty: 2000, qtyArrived: null}
+                    ]
+                }
+            ]
+
+            // end fetchedProductsByAjax array
+
+            //Set data in the vue data object
+            this.products = fetchedProductsByAjax;
+        }
+    },
+
+    //Outside of methods object . This is in the same level where the data and methods oobjects are
+    mounted(){
+        //Fetch the products here if you want to load the products as soon as the page is loaded
+        this.fetchProducts();
     }
 })
