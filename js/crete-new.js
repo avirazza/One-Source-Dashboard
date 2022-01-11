@@ -1,6 +1,25 @@
+Vue.component('v-select', VueSelect.VueSelect);
+
 var app = new Vue({
     el: '#main',
     data: {
+        manufacterers: [
+            {label: 'Manufacterers 1', id: '1'},
+            {label: 'Manufacterers 2', id: '2'},
+            {label: 'Manufacterers 3', id: '3'},
+        ],
+        categories: [
+            {label: 'Category 1', id: '1'},
+            {label: 'Category 2', id: '2'},
+            {label: 'Category 3', id: '3'},
+        ],
+        query: {
+            manufacturer: '',
+            category: '',
+            searchTerm: '',
+            count: 5,
+            page: 0
+        },
         //Main form
         totalCost: 573.3,
         totalWeight: 45.5,
@@ -98,7 +117,8 @@ var app = new Vue({
         selectedProduct: null,
         // skuForm: {},
         skuFormMode: 'save',
-        products: null
+        products: null,
+        productPages: null
 
     },
     methods: {
@@ -209,7 +229,7 @@ var app = new Vue({
             this.addingSkuTo = i;
 
             //If you want to fetch the products when the sku selector is opened / the + icon is clicked do it here
-            this.fetchProducts();
+            //this.fetchProducts();
         },
         openSkuForm(parentBox, product){
             this.addingSkuTo = parentBox;
@@ -355,6 +375,12 @@ var app = new Vue({
         },
         fetchProducts(){
 
+            console.log('Manufacturer : ' + this.query.manufacturer.id);
+            console.log('Category : ' + this.query.category.id);
+            console.log('Search Term : ' + this.query.searchTerm);
+            console.log('Count : ' + this.query.count);
+            console.log('Page : ' + this.query.page);
+
             //This function is fetching the products, you can write the ajax code here or directly in the mounted hook / openSkuSelector function
 
             // fetchedProductsByAjax array
@@ -488,12 +514,46 @@ var app = new Vue({
 
             //Set data in the vue data object
             this.products = fetchedProductsByAjax;
+            
+        },
+
+        fetchProductPagesByAjax(){
+            var fetchedProductPagesByAjax = [
+                '#',
+                '#',
+                '#',
+                '#',
+                '#'
+            ]
+
+            this.productPages = fetchedProductPagesByAjax;
+        },
+
+        selectProductPage(page){
+            this.query.page = page;
+            this.fetchProducts();
+        },
+        productsNextPage(){
+            var totalPage = this.productPages.length;
+            if(totalPage -1 > this.query.page){
+                this.query.page += 1;
+            }
+            this.fetchProducts();
+        },
+        productPreviousPage(){
+            if(0 < this.query.page){
+                this.query.page -= 1;
+            }
+            this.fetchProducts();
         }
+
     },
 
     //Outside of methods object . This is in the same level where the data and methods oobjects are
     mounted(){
+
         //Fetch the products here if you want to load the products as soon as the page is loaded
         this.fetchProducts();
-    }
+        this.fetchProductPagesByAjax();
+    },
 })

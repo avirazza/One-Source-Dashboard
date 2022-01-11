@@ -61,8 +61,21 @@
 
       <script src="js/vue@2.6.14.js"></script>
       <link rel="stylesheet" href="css/new-styles.css">
+
+      <!-- Vue select -->
+      <script src="https://unpkg.com/vue-select@3.0.0"></script>
+      <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">
+
+      <style>
+         .vs__dropdown-toggle {
+            background: #fff;
+         }
+      </style>
    </head>
    <body>
+
+
+
       <div class="admin-body-container container-fluid">
          <script> //var boxtest = localStorage.getItem('boxed'); if (boxtest === 'true') {document.body.className+=' boxed-layout';} </script>
          <nav class="navbar navbar-default">
@@ -326,265 +339,13 @@
                                                         <div class="col-md-2 col-sm-3">
                                                            <label class="control-label" for="product_picker_manufacturer_filter">Filter by Manufacturer</label>
                                                            <div class="row-fluid">
-                                                              <select id="product_picker_manufacturer_filter" class="form-control" name="product-picker-filter[manufacturer_id]" style="display: none;">
-                                                                 <option value=""> - All Manufacturers - </option>
-                                                                 <option value="29">Agent18</option>
-                                                                 <option value="38">Altec</option>
-                                                                 <option value="138">Amazon</option>
-                                                                 <option value="43">Amped Up</option>
-                                                                 <option value="13">Apple</option>
-                                                                 <option value="124">ARGOM TECH</option>
-                                                                 <option value="33">AT&amp;T</option>
-                                                                 <option value="36">AudioGeek</option>
-                                                                 <option value="113">AudioMod </option>
-                                                                 <option value="103">B&amp;C Industries</option>
-                                                                 <option value="44">Ballistic</option>
-                                                                 <option value="5">Base</option>
-                                                                 <option value="129">Beats</option>
-                                                                 <option value="21">Belkin</option>
-                                                                 <option value="31">Blackberry</option>
-                                                                 <option value="19">Body Glove</option>
-                                                                 <option value="136">Braven</option>
-                                                                 <option value="55">Case Mate</option>
-                                                                 <option value="100">CaseLogic</option>
-                                                                 <option value="106">DDMWS</option>
-                                                                 <option value="46">Dualtek</option>
-                                                                 <option value="133">Duracell</option>
-                                                                 <option value="9">Encased</option>
-                                                                 <option value="134">Energizer</option>
-                                                                 <option value="107">Epix</option>
-                                                                 <option value="114">Galvanox</option>
-                                                                 <option value="109">Ghostek</option>
-                                                                 <option value="111">Google</option>
-                                                                 <option value="22">Griffin</option>
-                                                                 <option value="110">Harman Kardon</option>
-                                                                 <option value="76">HTC</option>
-                                                                 <option value="49">HYB</option>
-                                                                 <option value="39">iFrogz</option>
-                                                                 <option value="121">IFrogz</option>
-                                                                 <option value="48">iGo</option>
-                                                                 <option value="47">iLuv</option>
-                                                                 <option value="17">Incipio</option>
-                                                                 <option value="35">iOttie</option>
-                                                                 <option value="108">Jabra</option>
-                                                                 <option value="137">JAM</option>
-                                                                 <option value="23">Jawbone</option>
-                                                                 <option value="112">JBL</option>
-                                                                 <option value="122">Kate Spade</option>
-                                                                 <option value="130">Key</option>
-                                                                 <option value="126">KickBack</option>
-                                                                 <option value="28">Kingston</option>
-                                                                 <option value="14">LG</option>
-                                                                 <option value="15">Lifeproof</option>
-                                                                 <option value="131">Logiix</option>
-                                                                 <option value="69">LPTAB10</option>
-                                                                 <option value="135">Maxell</option>
-                                                                 <option value="104">Monoprice</option>
-                                                                 <option value="53">Mophie</option>
-                                                                 <option value="80">Motorola</option>
-                                                                 <option value="64">Movit</option>
-                                                                 <option value="119">mWORKS </option>
-                                                                 <option value="118">Nano FiX IT</option>
-                                                                 <option value="16">Otterbox</option>
-                                                                 <option value="117">Pelican</option>
-                                                                 <option value="123">Phone Lasso</option>
-                                                                 <option value="63">Plantronics</option>
-                                                                 <option value="116">Popsockets</option>
-                                                                 <option value="98">PowerPeak</option>
-                                                                 <option value="61">Powersuit</option>
-                                                                 <option value="102">Premium</option>
-                                                                 <option value="125">Prime Packaging </option>
-                                                                 <option value="54">ProGlass</option>
-                                                                 <option value="27">Puregear</option>
-                                                                 <option value="11">Samsung</option>
-                                                                 <option value="52">SanDisk</option>
-                                                                 <option value="37">Scosche</option>
-                                                                 <option value="127">ScreenAssure</option>
-                                                                 <option value="128">Seams of Africa</option>
-                                                                 <option value="70">Sedio</option>
-                                                                 <option value="42">ShockProof</option>
-                                                                 <option value="26">Skullcandy</option>
-                                                                 <option value="18">Speck</option>
-                                                                 <option value="24">Spigen</option>
-                                                                 <option value="56">Sports</option>
-                                                                 <option value="132">Sunbeam</option>
-                                                                 <option value="34">T-Mobile</option>
-                                                                 <option value="99">Targus</option>
-                                                                 <option value="120">tech21</option>
-                                                                 <option value="115">Transcend</option>
-                                                                 <option value="25">UAG</option>
-                                                                 <option value="68">Urban Armor Gear</option>
-                                                                 <option value="10">Urban Sound Gear</option>
-                                                                 <option value="32">Verizon</option>
-                                                                 <option value="40">Wicked</option>
-                                                              </select>
-                                                              <div>
-                                                                 <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title=" - All Manufacturers - " style="width: 100%;"> - All Manufacturers -  <b class="caret"></b></button>
-                                                                 <ul class="multiselect-container dropdown-menu" style="max-height: 300px; overflow: hidden auto;">
-                                                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" placeholder="Search"></div>
-                                                                    <li class="active"><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="">  - All Manufacturers - </label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="29"> Agent18</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="38"> Altec</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="138"> Amazon</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="43"> Amped Up</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="13"> Apple</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="124"> ARGOM TECH</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="33"> AT&amp;T</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="36"> AudioGeek</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="113"> AudioMod </label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="103"> B&amp;C Industries</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="44"> Ballistic</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="5"> Base</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="129"> Beats</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="21"> Belkin</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="31"> Blackberry</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="19"> Body Glove</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="136"> Braven</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="55"> Case Mate</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="100"> CaseLogic</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="106"> DDMWS</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="46"> Dualtek</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="133"> Duracell</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="9"> Encased</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="134"> Energizer</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="107"> Epix</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="114"> Galvanox</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="109"> Ghostek</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="111"> Google</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="22"> Griffin</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="110"> Harman Kardon</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="76"> HTC</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="49"> HYB</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="39"> iFrogz</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="121"> IFrogz</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="48"> iGo</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="47"> iLuv</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="17"> Incipio</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="35"> iOttie</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="108"> Jabra</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="137"> JAM</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="23"> Jawbone</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="112"> JBL</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="122"> Kate Spade</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="130"> Key</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="126"> KickBack</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="28"> Kingston</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="14"> LG</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="15"> Lifeproof</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="131"> Logiix</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="69"> LPTAB10</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="135"> Maxell</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="104"> Monoprice</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="53"> Mophie</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="80"> Motorola</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="64"> Movit</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="119"> mWORKS </label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="118"> Nano FiX IT</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="16"> Otterbox</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="117"> Pelican</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="123"> Phone Lasso</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="63"> Plantronics</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="116"> Popsockets</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="98"> PowerPeak</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="61"> Powersuit</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="102"> Premium</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="125"> Prime Packaging </label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="54"> ProGlass</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="27"> Puregear</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="11"> Samsung</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="52"> SanDisk</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="37"> Scosche</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="127"> ScreenAssure</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="128"> Seams of Africa</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="70"> Sedio</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="42"> ShockProof</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="26"> Skullcandy</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="18"> Speck</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="24"> Spigen</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="56"> Sports</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="132"> Sunbeam</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="34"> T-Mobile</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="99"> Targus</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="120"> tech21</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="115"> Transcend</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="25"> UAG</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="68"> Urban Armor Gear</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="10"> Urban Sound Gear</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="32"> Verizon</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_manufacturer_id]" value="40"> Wicked</label></a></li>
-                                                                 </ul>
-                                                              </div>
+                                                               <v-select v-model="query.manufacturer" :options="manufacterers" @input="fetchProducts" placeholder="All manufacterers"></v-select>
                                                            </div>
                                                         </div>
                                                         <div class="col-md-2 col-sm-3">
                                                            <label class="control-label" for="product_picker_category_filter">Category</label>
                                                            <div class="row-fluid">
-                                                              <select id="product_picker_category_filter" class="form-control" name="product-picker-filter[category_id]" style="display: none;">
-                                                                 <option value=""> - All Categories - </option>
-                                                                 <option value="40">Accessories</option>
-                                                                 <option value="50">Activewear</option>
-                                                                 <option value="55">Airpod Case</option>
-                                                                 <option value="53">Apple Watch Accessory</option>
-                                                                 <option value="45">Audio</option>
-                                                                 <option value="52">Audio Adapter</option>
-                                                                 <option value="59">Batteries</option>
-                                                                 <option value="33">Battery Cases</option>
-                                                                 <option value="30">Bluetooth</option>
-                                                                 <option value="47">Bluetooth Speakers</option>
-                                                                 <option value="41">Car Chargers</option>
-                                                                 <option value="32">Car Mounts</option>
-                                                                 <option value="29">Cases</option>
-                                                                 <option value="37">Charging Cables</option>
-                                                                 <option value="56">Computer Supplies</option>
-                                                                 <option value="51">COVID-19 Supplies</option>
-                                                                 <option value="60">George</option>
-                                                                 <option value="27">Headset</option>
-                                                                 <option value="54">Liquid Glass</option>
-                                                                 <option value="39">Memory</option>
-                                                                 <option value="58">OEM</option>
-                                                                 <option value="49">PopSockets</option>
-                                                                 <option value="36">Portable Power</option>
-                                                                 <option value="31">Screen Protectors</option>
-                                                                 <option value="57">Store Supplies</option>
-                                                                 <option value="48">Stylus</option>
-                                                                 <option value="43">Wall Chargers</option>
-                                                                 <option value="46">Wireless Chargers</option>
-                                                              </select>
-                                                              <div>
-                                                                 <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title=" - All Categories - " style="width: 100%;"> - All Categories -  <b class="caret"></b></button>
-                                                                 <ul class="multiselect-container dropdown-menu" style="max-height: 300px; overflow: hidden auto;">
-                                                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span><input class="form-control multiselect-search" type="text" placeholder="Search"></div>
-                                                                    <li class="active"><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="">  - All Categories - </label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="40"> Accessories</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="50"> Activewear</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="55"> Airpod Case</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="53"> Apple Watch Accessory</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="45"> Audio</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="52"> Audio Adapter</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="59"> Batteries</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="33"> Battery Cases</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="30"> Bluetooth</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="47"> Bluetooth Speakers</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="41"> Car Chargers</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="32"> Car Mounts</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="29"> Cases</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="37"> Charging Cables</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="56"> Computer Supplies</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="51"> COVID-19 Supplies</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="60"> George</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="27"> Headset</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="54"> Liquid Glass</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="39"> Memory</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="58"> OEM</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="49"> PopSockets</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="36"> Portable Power</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="31"> Screen Protectors</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="57"> Store Supplies</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="48"> Stylus</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="43"> Wall Chargers</label></a></li>
-                                                                    <li><a href="javascript:void(0);"><label class="radio"><input type="radio" name="product-picker-filter[selected_category_id]" value="46"> Wireless Chargers</label></a></li>
-                                                                 </ul>
-                                                              </div>
+                                                               <v-select v-model="query.category" :options="categories" @input="fetchProducts" placeholder="All manufacterers"></v-select>
                                                            </div>
                                                         </div>
                                                      </div>
@@ -596,7 +357,7 @@
                                                         <div class="row">
                                                            <div class="col-sm-12 datatables-toolbar">
                                                               <div class="pull-right">
-                                                                 <div id="product-picker-tool-table-no-suffix_filter" class="dataTables_filter"><label><input type="search" class="" aria-controls="product-picker-tool-table-no-suffix" placeholder="Enter Filter Terms Here...."></label></div>
+                                                                 <div id="product-picker-tool-table-no-suffix_filter" class="dataTables_filter"><label><input @keyup="fetchProducts" v-model="query.searchTerm" type="search" class="" aria-controls="product-picker-tool-table-no-suffix" placeholder="Enter Filter Terms Here...."></label></div>
                                                               </div>
                                                               <div class="pull-left">
                                                                  <div class="dataTables_info" id="product-picker-tool-table-no-suffix_info" role="status" aria-live="polite">4,655 Total Products.</div>
@@ -654,7 +415,7 @@
                                                                  <div class="dataTables_length" id="product-picker-tool-table-no-suffix_length">
                                                                     <label>
                                                                        Show 
-                                                                       <select name="product-picker-tool-table-no-suffix_length" aria-controls="product-picker-tool-table-no-suffix" class="">
+                                                                       <select @change="fetchProducts" v-model="query.count" name="product-picker-tool-table-no-suffix_length" aria-controls="product-picker-tool-table-no-suffix" class="">
                                                                           <option value="5">5</option>
                                                                           <option value="10">10</option>
                                                                           <option value="25">25</option>
@@ -667,14 +428,16 @@
                                                               </div>
                                                               <div class="pull-right">
                                                                  <div class="dataTables_paginate paging_bs_normal" id="product-picker-tool-table-no-suffix_paginate">
-                                                                    <ul class="pagination pagination-sm">
-                                                                       <li class="prev disabled"><a href="#"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
-                                                                       <li class="active"><a href="#">1</a></li>
+                                                                    <ul class="pagination pagination-sm" v-if="productPages">
+                                                                       <li @click.prevent="productPreviousPage" class="prev"><a href="#"><i class="fa fa-caret-left"></i> &nbsp;</a></li>
+                                                                       <li @click.prevent="selectProductPage(i)" v-bind:class="{ active: query.page == i }" v-for="(productPage, i) in productPages"><a :href="productPage">{{i+1 }}</a></li>
+                                                                       <!-- <li class="prev disabled"><a href="#"><i class="fa fa-caret-left"></i> &nbsp;</a></li> -->
+                                                                       <!-- <li class="active"><a href="#">1</a></li>
                                                                        <li><a href="#">2</a></li>
                                                                        <li><a href="#">3</a></li>
                                                                        <li><a href="#">4</a></li>
-                                                                       <li><a href="#">5</a></li>
-                                                                       <li class="next"><a href="#">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
+                                                                       <li><a href="#">5</a></li> -->
+                                                                       <li @click.prevent="productsNextPage" class="next"><a href="#">&nbsp;<i class="fa fa-caret-right"></i> </a></li>
                                                                     </ul>
                                                                  </div>
                                                               </div>
@@ -852,11 +615,14 @@
             </div>
 
             <!-- / Generate bill popup -->
-
-
          </div>
       </div>
       <!-- End #Main -->
+
+
+
+
+
       <!-- TODO Clean up asset management -->
       <script type="text/javascript" src="https://www.onesourcesuppliers.com/template_assets/vendor/plugins/raphael/raphael.js"></script>
       <script type="text/javascript" src="https://www.onesourcesuppliers.com/template_assets/vendor/plugins/morris/morris.js"></script>
